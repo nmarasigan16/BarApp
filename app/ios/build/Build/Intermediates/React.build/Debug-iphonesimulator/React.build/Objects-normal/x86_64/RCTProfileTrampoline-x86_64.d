@@ -1,0 +1,4 @@
+dependencies: \
+  /Users/nkm/cs242/Assignment3/node_modules/react-native/React/Profiler/RCTProfileTrampoline-x86_64.S \
+  /Users/nkm/cs242/Assignment3/node_modules/react-native/React/Base/RCTDefines.h \
+  /Users/nkm/cs242/Assignment3/node_modules/react-native/React/Profiler/RCTMacros.h
