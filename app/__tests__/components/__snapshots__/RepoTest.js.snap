@@ -1,0 +1,145 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`renders correctly 1`] = `
+<View>
+  <View
+    style={
+      Object {
+        "alignSelf": "center",
+        "flexDirection": "row",
+        "height": 133.4,
+        "justifyContent": "space-between",
+        "marginTop": 5,
+        "width": 675,
+      }
+    }
+  >
+    <View
+      accessibilityComponentType={undefined}
+      accessibilityLabel={undefined}
+      accessibilityTraits={undefined}
+      accessible={true}
+      collapsable={undefined}
+      hitSlop={undefined}
+      isTVSelectable={true}
+      nativeID={undefined}
+      onLayout={undefined}
+      onResponderGrant={[Function]}
+      onResponderMove={[Function]}
+      onResponderRelease={[Function]}
+      onResponderTerminate={[Function]}
+      onResponderTerminationRequest={[Function]}
+      onStartShouldSetResponder={[Function]}
+      style={
+        Object {
+          "opacity": 1,
+        }
+      }
+      testID={undefined}
+      tvParallaxProperties={undefined}
+    >
+      <View
+        style={
+          Object {
+            "flex": 3,
+            "overflow": "hidden",
+            "width": 562.5,
+          }
+        }
+      >
+        <Text
+          accessible={true}
+          allowFontScaling={true}
+          disabled={false}
+          ellipsizeMode="tail"
+          style={
+            Array [
+              Object {
+                "fontFamily": "Arial",
+              },
+              Array [
+                Object {
+                  "color": "blue",
+                  "fontSize": 45.911331934501746,
+                  "fontWeight": "bold",
+                  "marginBottom": 5.336,
+                  "top": 6.67,
+                },
+              ],
+            ]
+          }
+        >
+          cat
+        </Text>
+        <Text
+          accessible={true}
+          allowFontScaling={true}
+          disabled={false}
+          ellipsizeMode="tail"
+          style={
+            Array [
+              Object {
+                "fontFamily": "Arial",
+              },
+              Array [
+                Object {
+                  "fontSize": 22.955665967250873,
+                  "fontStyle": "italic",
+                },
+              ],
+            ]
+          }
+        >
+          hello
+        </Text>
+        <Text
+          accessible={true}
+          allowFontScaling={true}
+          disabled={false}
+          ellipsizeMode="tail"
+          style={
+            Array [
+              Object {
+                "fontFamily": "Arial",
+              },
+              Array [
+                Object {
+                  "fontSize": 19.894910504950758,
+                },
+              ],
+            ]
+          }
+        >
+          meow
+        </Text>
+      </View>
+    </View>
+    <RepoStar
+      repo={
+        Object {
+          "description": "meow",
+          "id": 40,
+          "name": "cat",
+          "owner": Object {
+            "login": "hello",
+          },
+        }
+      }
+    />
+  </View>
+  <View
+    style={
+      Array [
+        Object {
+          "backgroundColor": "#D3D3D3",
+          "height": 1,
+        },
+        Object {
+          "alignSelf": "center",
+          "width": 675,
+        },
+      ]
+    }
+  />
+</View>
+`;

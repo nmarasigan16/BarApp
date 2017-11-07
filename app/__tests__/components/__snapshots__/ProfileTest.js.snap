@@ -1,0 +1,582 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`renders correctly bio with all items 1`] = `
+<View>
+  <View
+    style={
+      Object {
+        "margin": 10,
+      }
+    }
+  >
+    <Text
+      accessible={true}
+      allowFontScaling={true}
+      disabled={false}
+      ellipsizeMode="tail"
+      style={
+        Array [
+          Object {
+            "fontFamily": "Arial",
+          },
+          Object {
+            "textAlign": "center",
+          },
+        ]
+      }
+    >
+      <Text
+        accessible={true}
+        allowFontScaling={true}
+        disabled={false}
+        ellipsizeMode="tail"
+        style={
+          Array [
+            Object {
+              "fontFamily": "Arial",
+            },
+            Object {
+              "fontSize": 38.259443278751455,
+              "fontWeight": "bold",
+            },
+          ]
+        }
+      >
+        Bio
+        
+
+      </Text>
+      <Text
+        accessible={true}
+        allowFontScaling={true}
+        disabled={false}
+        ellipsizeMode="tail"
+        style={
+          Array [
+            Object {
+              "fontFamily": "Arial",
+            },
+            Object {
+              "fontSize": 30.607554623001164,
+            },
+          ]
+        }
+      >
+        I eat cheese
+      </Text>
+    </Text>
+  </View>
+  <View
+    style={
+      Object {
+        "flexDirection": "column",
+        "margin": 15,
+      }
+    }
+  >
+    <Text
+      accessible={true}
+      allowFontScaling={true}
+      disabled={false}
+      ellipsizeMode="tail"
+      style={
+        Array [
+          Object {
+            "fontFamily": "Arial",
+          },
+          Object {
+            "flex": 0,
+            "margin": 3,
+            "textAlign": "center",
+          },
+        ]
+      }
+    >
+      Website: 
+      moomoo.com
+    </Text>
+    <Text
+      accessible={true}
+      allowFontScaling={true}
+      disabled={false}
+      ellipsizeMode="tail"
+      style={
+        Array [
+          Object {
+            "fontFamily": "Arial",
+          },
+          Object {
+            "flex": 0,
+            "margin": 3,
+            "textAlign": "center",
+          },
+        ]
+      }
+    >
+      Email: 
+      crapito@gmail.com
+    </Text>
+  </View>
+</View>
+`;
+
+exports[`renders correctly bio without bio 1`] = `
+<View>
+  <View
+    style={
+      Object {
+        "flexDirection": "column",
+        "margin": 15,
+      }
+    }
+  >
+    <Text
+      accessible={true}
+      allowFontScaling={true}
+      disabled={false}
+      ellipsizeMode="tail"
+      style={
+        Array [
+          Object {
+            "fontFamily": "Arial",
+          },
+          Object {
+            "flex": 0,
+            "margin": 3,
+            "textAlign": "center",
+          },
+        ]
+      }
+    >
+      Website: 
+      moomoo.com
+    </Text>
+    <Text
+      accessible={true}
+      allowFontScaling={true}
+      disabled={false}
+      ellipsizeMode="tail"
+      style={
+        Array [
+          Object {
+            "fontFamily": "Arial",
+          },
+          Object {
+            "flex": 0,
+            "margin": 3,
+            "textAlign": "center",
+          },
+        ]
+      }
+    >
+      Email: 
+      crapito@gmail.com
+    </Text>
+  </View>
+</View>
+`;
+
+exports[`renders correctly bio without website 1`] = `
+<View>
+  <View
+    style={
+      Object {
+        "margin": 10,
+      }
+    }
+  >
+    <Text
+      accessible={true}
+      allowFontScaling={true}
+      disabled={false}
+      ellipsizeMode="tail"
+      style={
+        Array [
+          Object {
+            "fontFamily": "Arial",
+          },
+          Object {
+            "textAlign": "center",
+          },
+        ]
+      }
+    >
+      <Text
+        accessible={true}
+        allowFontScaling={true}
+        disabled={false}
+        ellipsizeMode="tail"
+        style={
+          Array [
+            Object {
+              "fontFamily": "Arial",
+            },
+            Object {
+              "fontSize": 38.259443278751455,
+              "fontWeight": "bold",
+            },
+          ]
+        }
+      >
+        Bio
+        
+
+      </Text>
+      <Text
+        accessible={true}
+        allowFontScaling={true}
+        disabled={false}
+        ellipsizeMode="tail"
+        style={
+          Array [
+            Object {
+              "fontFamily": "Arial",
+            },
+            Object {
+              "fontSize": 30.607554623001164,
+            },
+          ]
+        }
+      >
+        I eat cheese
+      </Text>
+    </Text>
+  </View>
+  <View
+    style={
+      Object {
+        "flexDirection": "column",
+        "margin": 15,
+      }
+    }
+  >
+    <Text
+      accessible={true}
+      allowFontScaling={true}
+      disabled={false}
+      ellipsizeMode="tail"
+      style={
+        Array [
+          Object {
+            "fontFamily": "Arial",
+          },
+          Object {
+            "flex": 0,
+            "margin": 3,
+            "textAlign": "center",
+          },
+        ]
+      }
+    >
+      Email: 
+      crapito@gmail.com
+    </Text>
+  </View>
+</View>
+`;
+
+exports[`renders correctly followers 1`] = `
+<View
+  style={
+    Object {
+      "alignItems": "center",
+      "flexDirection": "row",
+      "justifyContent": "center",
+      "margin": 20,
+    }
+  }
+>
+  <View
+    accessibilityComponentType={undefined}
+    accessibilityLabel={undefined}
+    accessibilityTraits={undefined}
+    accessible={true}
+    collapsable={undefined}
+    hitSlop={undefined}
+    isTVSelectable={true}
+    nativeID={undefined}
+    onLayout={undefined}
+    onResponderGrant={[Function]}
+    onResponderMove={[Function]}
+    onResponderRelease={[Function]}
+    onResponderTerminate={[Function]}
+    onResponderTerminationRequest={[Function]}
+    onStartShouldSetResponder={[Function]}
+    style={
+      Object {
+        "flex": 1,
+        "opacity": 1,
+      }
+    }
+    testID={undefined}
+    tvParallaxProperties={undefined}
+  >
+    <View>
+      <View
+        style={
+          Object {
+            "alignItems": "center",
+            "flexDirection": "column",
+            "justifyContent": "center",
+          }
+        }
+      >
+        <Text
+          accessible={true}
+          allowFontScaling={true}
+          disabled={false}
+          ellipsizeMode="tail"
+          style={
+            Array [
+              Object {
+                "fontFamily": "Arial",
+              },
+              Object {
+                "fontSize": 30.607554623001164,
+                "margin": 10,
+                "textAlign": "center",
+              },
+            ]
+          }
+        >
+          Followers
+        </Text>
+        <Text
+          accessible={true}
+          allowFontScaling={true}
+          disabled={false}
+          ellipsizeMode="tail"
+          style={
+            Array [
+              Object {
+                "fontFamily": "Arial",
+              },
+              Object {
+                "fontSize": 45.911331934501746,
+                "fontWeight": "bold",
+                "textAlign": "center",
+              },
+            ]
+          }
+        />
+      </View>
+    </View>
+  </View>
+  <View
+    accessibilityComponentType={undefined}
+    accessibilityLabel={undefined}
+    accessibilityTraits={undefined}
+    accessible={true}
+    collapsable={undefined}
+    hitSlop={undefined}
+    isTVSelectable={true}
+    nativeID={undefined}
+    onLayout={undefined}
+    onResponderGrant={[Function]}
+    onResponderMove={[Function]}
+    onResponderRelease={[Function]}
+    onResponderTerminate={[Function]}
+    onResponderTerminationRequest={[Function]}
+    onStartShouldSetResponder={[Function]}
+    style={
+      Object {
+        "flex": 1,
+        "opacity": 1,
+      }
+    }
+    testID={undefined}
+    tvParallaxProperties={undefined}
+  >
+    <View
+      style={
+        Object {
+          "flex": 1,
+        }
+      }
+    >
+      <View
+        style={
+          Object {
+            "alignItems": "center",
+            "flexDirection": "column",
+            "justifyContent": "center",
+          }
+        }
+      >
+        <Text
+          accessible={true}
+          allowFontScaling={true}
+          disabled={false}
+          ellipsizeMode="tail"
+          style={
+            Array [
+              Object {
+                "fontFamily": "Arial",
+              },
+              Object {
+                "fontSize": 30.607554623001164,
+                "margin": 10,
+                "textAlign": "center",
+              },
+            ]
+          }
+        >
+          Following
+        </Text>
+        <Text
+          accessible={true}
+          allowFontScaling={true}
+          disabled={false}
+          ellipsizeMode="tail"
+          style={
+            Array [
+              Object {
+                "fontFamily": "Arial",
+              },
+              Object {
+                "fontSize": 45.911331934501746,
+                "fontWeight": "bold",
+                "textAlign": "center",
+              },
+            ]
+          }
+        />
+      </View>
+    </View>
+  </View>
+</View>
+`;
+
+exports[`renders correctly number 1`] = `
+<View
+  style={
+    Object {
+      "alignItems": "center",
+      "flexDirection": "column",
+      "justifyContent": "center",
+    }
+  }
+>
+  <Text
+    accessible={true}
+    allowFontScaling={true}
+    disabled={false}
+    ellipsizeMode="tail"
+    style={
+      Array [
+        Object {
+          "fontFamily": "Arial",
+        },
+        Object {
+          "fontSize": 30.607554623001164,
+          "margin": 10,
+          "textAlign": "center",
+        },
+      ]
+    }
+  >
+    Percentage
+  </Text>
+  <Text
+    accessible={true}
+    allowFontScaling={true}
+    disabled={false}
+    ellipsizeMode="tail"
+    style={
+      Array [
+        Object {
+          "fontFamily": "Arial",
+        },
+        Object {
+          "fontSize": 45.911331934501746,
+          "fontWeight": "bold",
+          "textAlign": "center",
+        },
+      ]
+    }
+  >
+    1000
+  </Text>
+</View>
+`;
+
+exports[`renders correctly repos 1`] = `
+<View
+  accessibilityComponentType={undefined}
+  accessibilityLabel={undefined}
+  accessibilityTraits={undefined}
+  accessible={true}
+  collapsable={undefined}
+  hitSlop={undefined}
+  isTVSelectable={true}
+  nativeID={undefined}
+  onLayout={undefined}
+  onResponderGrant={[Function]}
+  onResponderMove={[Function]}
+  onResponderRelease={[Function]}
+  onResponderTerminate={[Function]}
+  onResponderTerminationRequest={[Function]}
+  onStartShouldSetResponder={[Function]}
+  style={
+    Object {
+      "margin": 10,
+      "opacity": 1,
+    }
+  }
+  testID={undefined}
+  tvParallaxProperties={undefined}
+>
+  <View>
+    <View
+      style={
+        Object {
+          "alignItems": "center",
+          "flexDirection": "column",
+          "justifyContent": "center",
+        }
+      }
+    >
+      <Text
+        accessible={true}
+        allowFontScaling={true}
+        disabled={false}
+        ellipsizeMode="tail"
+        style={
+          Array [
+            Object {
+              "fontFamily": "Arial",
+            },
+            Object {
+              "fontSize": 30.607554623001164,
+              "margin": 10,
+              "textAlign": "center",
+            },
+          ]
+        }
+      >
+        Public Repositories
+      </Text>
+      <Text
+        accessible={true}
+        allowFontScaling={true}
+        disabled={false}
+        ellipsizeMode="tail"
+        style={
+          Array [
+            Object {
+              "fontFamily": "Arial",
+            },
+            Object {
+              "fontSize": 45.911331934501746,
+              "fontWeight": "bold",
+              "textAlign": "center",
+            },
+          ]
+        }
+      >
+        4
+      </Text>
+    </View>
+  </View>
+</View>
+`;
