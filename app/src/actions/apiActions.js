@@ -1,5 +1,7 @@
 import { apiActionTypes as actionTypes } from './actionTypes';
 
+export const API_ROOT = '';
+export const FACEBOOK_API_ROOT = ''
 
 //Helper functions
 function makeParam(param, val) {

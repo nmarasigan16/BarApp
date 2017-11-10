@@ -3,7 +3,6 @@ import { makeGetRequest, makePostRequest } from "./apiActions";
 import { fetchStarred } from './profileActions';
 
 const CLIENT_ID = '96b9e610674e11455074';
-const CLIENT_SECRET = '3e192278d8cc74d0dd968e8bac629994c3cc5863';
 
 export const authenticate = (response) => {
     return {

@@ -5,7 +5,8 @@ import {
     Platform
 } from 'react-native';
 import Navigator from './Navigator';
-import HomeButton from '../containers/home_button/HomeButtonComponent';
+import { colorScheme } from "./ColorScheme";
+import LoginPage from '../components/LoginPage/LoginPageComponent';
 
 
 class HomePage extends Component {
@@ -14,18 +15,13 @@ class HomePage extends Component {
     }
 
     render() {
-        let height = 0;
-        if(Platform.OS !== 'ios') {
-            height = StatusBar.currentHeight;
-        }
+        let height = Platform.OS === 'ios' ? 20 : StatusBar.height;
         return (
-            <View style={{flex: 1, backgroundColor: 'darkslategrey'}}>
+            <View style={{flex: 1, backgroundColor: colorScheme.primary}}>
                 <StatusBar
-                    barStyle={'light-content'}
-                />
-                <View style={{height:15}} />
-                <HomeButton />
-                <Navigator />
+                    barStyle={'light-content'}/>
+                <View style={{height, backgroundColor: colorScheme.secondary}} />
+                <LoginPage />
             </View>
         )
     }

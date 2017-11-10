@@ -12,7 +12,7 @@ const mockStore = configureMockStore([]);
 
 
 describe('profile', () => {
-    it('gets and stores profile', () => {
+    it('gets and stores BarProfile', () => {
 
         storage.storeItem = jest.fn();
         const action = {

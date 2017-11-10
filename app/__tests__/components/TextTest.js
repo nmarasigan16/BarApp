@@ -1,6 +1,6 @@
 import 'react-native';
 import React from 'react';
-import Text from '../../src/components/text/TextComponent';
+import Text from '../../src/components/general/text/TextComponent';
 
 // Note: test renderer must be required after react-native.
 import renderer from 'react-test-renderer';

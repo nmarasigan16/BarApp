@@ -7,18 +7,18 @@ const initialState = {
 
 function apiReducer(state = initialState, action){
     switch(action.type) {
-        case actionTypes.fetchProfile: {
+        case actionTypes.fetchItem: {
             return Object.assign({}, state, {
                 isFetching: true
             });
         }
-        case actionTypes.fetchProfileError: {
+        case actionTypes.fetchItemFailure: {
             return Object.assign({}, state, {
                 isFetching: false,
                 error: true,
             });
         }
-        case actionTypes.fetchProfileSuccess: {
+        case actionTypes.fetchItemSuccess: {
             return Object.assign({}, state, {
                 isFetching: false
             });

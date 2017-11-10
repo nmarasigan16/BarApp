@@ -4,7 +4,6 @@ import api from './apiReducer';
 import auth from './authReducer';
 
 export default combineReducers({
-    profile,
     api,
     auth
 });

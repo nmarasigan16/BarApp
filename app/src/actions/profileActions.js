@@ -16,7 +16,7 @@ const API_ROOT = 'https://api.github.com';
 
  */
 function profileMatch(username, profile) {
-    if(typeof profile != 'undefined' && 'login' in profile){
+    if(typeof profile !== 'undefined' && 'login' in profile){
         if(profile.login === username) {
            return true;
         }

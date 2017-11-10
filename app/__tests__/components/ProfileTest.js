@@ -1,10 +1,10 @@
 import 'react-native';
 import React from 'react';
 import mockState from '../../__mocks__/mockState';
-import Bio from '../../src/components/profile/bio/BioComponent';
-import Followers from '../../src/components/profile/followers/FollowersComponent';
-import Number from '../../src/components/profile/number/NumberComponent';
-import Repos from '../../src/components/profile/repos/RepoComponent';
+import Bio from '../../src/components/BarProfile/bio/BioComponent';
+import Followers from '../../src/components/BarProfile/followers/FollowersComponent';
+import Number from '../../src/components/general/number/NumberComponent';
+import Repos from '../../src/components/BarProfile/repos/RepoComponent';
 
 // Note: test renderer must be required after react-native.
 import renderer from 'react-test-renderer';

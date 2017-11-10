@@ -32,8 +32,6 @@ function configureStore(initialState) {
 
 const store = configureStore({});
 
-store.dispatch(update());
-
 export default AppProvider = () => (
     <Provider store={store}>
         <AppContainer />

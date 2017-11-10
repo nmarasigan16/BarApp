@@ -1,6 +1,6 @@
 import 'react-native';
 import React from 'react';
-import Avatar from '../../src/components/avatar/AvatarComponent';
+import Avatar from '../../src/components/general/avatar/AvatarComponent';
 
 // Note: test renderer must be required after react-native.
 import renderer from 'react-test-renderer';
