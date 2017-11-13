@@ -6,7 +6,7 @@ import {
 } from 'react-native';
 import Navigator from './Navigator';
 import { colorScheme } from "./ColorScheme";
-import LoginPage from '../components/LoginPage/LoginPageComponent';
+import LoginPage from '../containers/LoginPage/LoginPage';
 
 
 class HomePage extends Component {
@@ -17,11 +17,11 @@ class HomePage extends Component {
     render() {
         let height = Platform.OS === 'ios' ? 20 : StatusBar.height;
         return (
-            <View style={{flex: 1, backgroundColor: colorScheme.primary}}>
+            <View style={{flex: 1, backgroundColor: colorScheme.secondary}}>
                 <StatusBar
                     barStyle={'light-content'}/>
                 <View style={{height, backgroundColor: colorScheme.secondary}} />
-                <LoginPage />
+                <Navigator/>
             </View>
         )
     }

@@ -15,7 +15,7 @@ const NavigationBar = ({nav}) => {
     return (
         <View style={{height: height/20, flexDirection: 'row', backgroundColor: colorScheme.secondary}}>
             <View style={{width: width/4, justifyContent: 'center', alignContent: 'center'}}>
-                <TouchableOpacity>
+                <TouchableOpacity onPress={() => {nav.navigate('DrawerOpen')}}>
                     <Icon
                         name={'bars'}
                         size={height/30}

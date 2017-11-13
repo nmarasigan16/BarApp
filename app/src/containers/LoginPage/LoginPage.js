@@ -7,12 +7,12 @@ import {
 } from 'react-native';
 import { colorScheme } from "../../lib/ColorScheme";
 import { LogoStyle } from "../../lib/LogoStyle";
-import Text from '../general/text/TextComponent';
-import LoginForm from './LoginForm';
+import Text from '../../components/general/text/TextComponent';
+import LoginForm from '../../components/LoginPage/LoginForm';
 
 class LoginPage extends Component {
     constructor(props) {
-        super(props)
+        super(props);
         this.state = {
             showLogin: false,
             fadeAnim: new Animated.Value(0)

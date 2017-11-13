@@ -9,7 +9,7 @@ import Text from '../../general/text/TextComponent';
 import AdditionalInfo from './AdditionalInfoComponent';
 import { colorScheme } from "../../../lib/ColorScheme";
 
-const HeaderComponent = ({name='Legends'}) => {
+const HeaderComponent = ({name, telephone, location}) => {
     const { width, height } = Dimensions.get('window');
 
     return (
@@ -22,14 +22,19 @@ const HeaderComponent = ({name='Legends'}) => {
             }}>
                 {name}
             </Text>
-            <AdditionalInfo/>
+            {telephone || location ? <AdditionalInfo location={location} telephone={telephone}/> : null}
         </View>
     );
 };
 
 HeaderComponent.propTypes = {
-    name: PropTypes.string,
-    username: PropTypes.string.isRequired
+    name: PropTypes.string.isRequired,
+    telephone: PropTypes.string,
+    location: PropTypes.shape({
+        string_repr: PropTypes.string,
+        latitude: PropTypes.number,
+        longitude: PropTypes.number
+    }),
 };
 
 export default HeaderComponent;
