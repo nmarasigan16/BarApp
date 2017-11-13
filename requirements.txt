@@ -21,13 +21,12 @@ idna==2.6
 imagesize==0.7.1
 itsdangerous==0.24
 Jinja2==2.9.6
-jwt==0.5.2
 MarkupSafe==1.0
 passlib==1.7.1
-py-bcrypt==0.4
 pyasn1==0.3.7
 pycparser==2.18
 Pygments==2.2.0
+PyJWT==1.5.3
 pymongo==3.5.1
 pytz==2017.3
 requests==2.18.4
