@@ -16,7 +16,8 @@ class User:
         self.age = age
         self.gender = gender
 
-    def encode_auth_token(self, user_id):
+    @staticmethod
+    def encode_auth_token(user_id):
         """
         Generates the Auth Token
         :return: string
@@ -35,13 +36,14 @@ class User:
         except Exception as e:
             return e
 
-    def decode_auth_token(self, auth_token):
+    @staticmethod
+    def decode_auth_token(auth_token):
         """
         Decodes a given auth_token
         :return: string
         """
         try:
-            payload = jwt.decode(auth_token, SECRET_KEY)
+            payload = jwt.decode(auth_token, SECRET_KEY, algorithms=['HS256'])
             return payload['sub']
         except jwt.ExpiredSignatureError:
             return 'Signature expired. Please log in again.'
