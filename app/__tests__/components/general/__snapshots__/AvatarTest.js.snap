@@ -1,0 +1,21 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`renders correctly 1`] = `
+<Image
+  source={
+    Object {
+      "uri": "https://assets-cdn.github.com/images/modules/logos_page/GitHub-Mark.png",
+    }
+  }
+  style={
+    Array [
+      Object {
+        "borderRadius": 17,
+        "height": 34,
+        "width": 34,
+      },
+      undefined,
+    ]
+  }
+/>
+`;
