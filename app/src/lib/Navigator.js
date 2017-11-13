@@ -1,18 +1,18 @@
 import React, { Component } from 'react';
-import Profile from '../containers/BarProfile/BarProfileContainer';
-import { TabNavigator } from 'react-navigation';
+import Specials from '../containers/DailySpecials/DailySpecialsContainer';
+import Bar from '../containers/BarProfile/BarProfileContainer';
+import { DrawerNavigator } from 'react-navigation';
 
-const Navigator = TabNavigator({
-    Profile: {
-        screen: Profile,
+const Navigator = DrawerNavigator({
+    Specials: {
+        screen: Specials,
+    },
+    Bar: {
+        screen: Bar,
     },
 },
     {
-        tabBarPosition: 'bottom',
-        animationEnabled: true,
-        tabBarOptions: {
-            activeTintColor: 'blue',
-        },
+        drawerPosition: 'left',
 });
 
 export default Navigator;

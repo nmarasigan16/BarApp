@@ -1,16 +1,13 @@
 import 'react-native';
 import React from 'react';
-import Repo from '../../src/components/repos/RepoRowComponent';
+import Divider from '../../../src/components/general/divider/DividerComponent';
 
 // Note: test renderer must be required after react-native.
 import renderer from 'react-test-renderer';
-import mockState from "../../__mocks__/mockState";
 
-jest.mock('../../src/containers/repos/RepoStar', () => 'RepoStar');
 it('renders correctly', () => {
     const tree = renderer.create(
-        <Repo
-            repo={mockState.repos[0]}/>
+        <Divider />
     ).toJSON();
 
     expect(tree).toMatchSnapshot();

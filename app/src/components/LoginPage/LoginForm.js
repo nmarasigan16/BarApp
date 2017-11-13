@@ -14,7 +14,6 @@ import FacebookLogin from './FacebookLogin';
 
 const LoginForm = (props) => {
     const {width, height} = Dimensions.get('window');
-    //TODO add facebook login
 
     return (
         <View style={{alignSelf: 'center', flexDirection: 'column', width: 3*width/6, alignContent: 'center', opacity: props.opacity, marginTop: height/30}}>

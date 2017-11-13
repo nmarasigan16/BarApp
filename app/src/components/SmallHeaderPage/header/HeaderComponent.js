@@ -26,7 +26,6 @@ const HeaderComponent = ({name='Legends'}) => {
 
 HeaderComponent.propTypes = {
     name: PropTypes.string,
-    username: PropTypes.string.isRequired
 };
 
 export default HeaderComponent;

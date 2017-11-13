@@ -10,7 +10,7 @@ import Body from './body/BodyComponent';
 import Header from './header/HeaderComponent';
 import Nav from '../NavigationBar/NavigationBarComponent';
 
-const PageComponent = ({name, children}) => {
+const PageComponent = ({nav, name, telephone, location, children}) => {
 
     const styles = {
         container : {
@@ -22,9 +22,9 @@ const PageComponent = ({name, children}) => {
 
     return (
         <View style={{flex: 1}}>
-            <Nav />
+            <Nav nav={nav}/>
             <ScrollView>
-                <Header name={name} />
+                <Header name={name} telephone={telephone} location={location}/>
                 <Body content={children} />
             </ScrollView>
         </View>
@@ -32,6 +32,10 @@ const PageComponent = ({name, children}) => {
 };
 
 PageComponent.propTypes = {
+    name: PropTypes.string.isRequired,
+    children: PropTypes.any,
+    telephone: PropTypes.any,
+    location: PropTypes.any
 };
 
 export default PageComponent;
