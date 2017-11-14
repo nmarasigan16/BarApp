@@ -6,7 +6,7 @@
 Welcome to BarCode's documentation!
 ===================================
 
-**BarCode is a mobile application for party people**
+**BarCode is a mobile application for party people** |salsa|
 
 ------------------------------------------------------------
 
@@ -14,6 +14,10 @@ BarCode is a native application for iOS and Android.  Through our application, b
 
 
 .. toctree::
-   :maxdepth: 2
+   :maxdepth: 1
    :caption: Contents:
 
+   functionality/index
+
+
+.. |salsa| unicode:: U+1F483
