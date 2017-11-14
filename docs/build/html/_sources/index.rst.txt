@@ -6,7 +6,7 @@
 Welcome to BarCode's documentation!
 ===================================
 
-**BarCode is a mobile application for party people**
+**BarCode is a mobile application for party people unicode:: U+1F483**
 
 ------------------------------------------------------------
 

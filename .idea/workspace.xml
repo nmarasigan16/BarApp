@@ -1,7 +1,53 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="180b8b21-6977-488a-8509-d45a60123d55" name="Default" comment="" />
+    <list default="true" id="180b8b21-6977-488a-8509-d45a60123d55" name="Default" comment="">
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/coverage/lcov-report/sort-arrow-sprite.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/API/api.py" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/API/api_tests.py" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/API/user.py" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/__tests__/components/LargeHeaderPage/__snapshots__/HeaderTest.js.snap" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/__tests__/components/LargeHeaderPage/__snapshots__/LargeHeaderPageTest.js.snap" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/__tests__/components/general/__snapshots__/AvatarTest.js.snap" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/__tests__/components/general/__snapshots__/DividerTest.js.snap" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/__tests__/components/general/__snapshots__/TextTest.js.snap" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/coverage/coverage-final.json" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/coverage/lcov-report/base.css" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/coverage/lcov-report/prettify.css" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/coverage/lcov-report/prettify.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/coverage/lcov-report/sorter.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/coverage/lcov.info" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/api/temp.txt" afterPath="" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.gitignore" afterPath="$PROJECT_DIR$/.gitignore" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/.gitignore" afterPath="$PROJECT_DIR$/app/.gitignore" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/coverage/clover.xml" afterPath="$PROJECT_DIR$/app/coverage/clover.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/coverage/lcov-report/actions/actionTypes.js.html" afterPath="$PROJECT_DIR$/app/coverage/lcov-report/actions/actionTypes.js.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/coverage/lcov-report/actions/apiActions.js.html" afterPath="$PROJECT_DIR$/app/coverage/lcov-report/actions/apiActions.js.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/coverage/lcov-report/actions/index.html" afterPath="$PROJECT_DIR$/app/coverage/lcov-report/actions/index.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/coverage/lcov-report/components/LargeHeaderPage/PageComponent.js.html" afterPath="$PROJECT_DIR$/app/coverage/lcov-report/components/LargeHeaderPage/PageComponent.js.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/coverage/lcov-report/components/LargeHeaderPage/body/BodyComponent.js.html" afterPath="$PROJECT_DIR$/app/coverage/lcov-report/components/LargeHeaderPage/body/BodyComponent.js.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/coverage/lcov-report/components/LargeHeaderPage/body/index.html" afterPath="$PROJECT_DIR$/app/coverage/lcov-report/components/LargeHeaderPage/body/index.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/coverage/lcov-report/components/LargeHeaderPage/header/AdditionalInfoComponent.js.html" afterPath="$PROJECT_DIR$/app/coverage/lcov-report/components/LargeHeaderPage/header/AdditionalInfoComponent.js.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/coverage/lcov-report/components/LargeHeaderPage/header/HeaderComponent.js.html" afterPath="$PROJECT_DIR$/app/coverage/lcov-report/components/LargeHeaderPage/header/HeaderComponent.js.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/coverage/lcov-report/components/LargeHeaderPage/header/index.html" afterPath="$PROJECT_DIR$/app/coverage/lcov-report/components/LargeHeaderPage/header/index.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/coverage/lcov-report/components/LargeHeaderPage/index.html" afterPath="$PROJECT_DIR$/app/coverage/lcov-report/components/LargeHeaderPage/index.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/coverage/lcov-report/components/NavigationBar/NavigationBarComponent.js.html" afterPath="$PROJECT_DIR$/app/coverage/lcov-report/components/NavigationBar/NavigationBarComponent.js.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/coverage/lcov-report/components/NavigationBar/index.html" afterPath="$PROJECT_DIR$/app/coverage/lcov-report/components/NavigationBar/index.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/coverage/lcov-report/components/general/avatar/AvatarComponent.js.html" afterPath="$PROJECT_DIR$/app/coverage/lcov-report/components/general/avatar/AvatarComponent.js.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/coverage/lcov-report/components/general/avatar/index.html" afterPath="$PROJECT_DIR$/app/coverage/lcov-report/components/general/avatar/index.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/coverage/lcov-report/components/general/divider/DividerComponent.js.html" afterPath="$PROJECT_DIR$/app/coverage/lcov-report/components/general/divider/DividerComponent.js.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/coverage/lcov-report/components/general/divider/index.html" afterPath="$PROJECT_DIR$/app/coverage/lcov-report/components/general/divider/index.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/coverage/lcov-report/components/general/text/TextComponent.js.html" afterPath="$PROJECT_DIR$/app/coverage/lcov-report/components/general/text/TextComponent.js.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/coverage/lcov-report/components/general/text/TextStyle.js.html" afterPath="$PROJECT_DIR$/app/coverage/lcov-report/components/general/text/TextStyle.js.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/coverage/lcov-report/components/general/text/index.html" afterPath="$PROJECT_DIR$/app/coverage/lcov-report/components/general/text/index.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/coverage/lcov-report/index.html" afterPath="$PROJECT_DIR$/app/coverage/lcov-report/index.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/coverage/lcov-report/lib/ColorScheme.js.html" afterPath="$PROJECT_DIR$/app/coverage/lcov-report/lib/ColorScheme.js.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/coverage/lcov-report/lib/LogoStyle.js.html" afterPath="$PROJECT_DIR$/app/coverage/lcov-report/lib/LogoStyle.js.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/coverage/lcov-report/lib/index.html" afterPath="$PROJECT_DIR$/app/coverage/lcov-report/lib/index.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/docs/source/index.rst" afterPath="$PROJECT_DIR$/docs/source/index.rst" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/requirements.txt" afterPath="$PROJECT_DIR$/requirements.txt" />
+    </list>
     <ignored path="$PROJECT_DIR$/.tmp/" />
     <ignored path="$PROJECT_DIR$/temp/" />
     <ignored path="$PROJECT_DIR$/tmp/" />
@@ -236,7 +282,7 @@
     </history-entry>
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="36593000" />
+    <option name="totallyTimeSpent" value="36805000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="0" width="1440" height="900" extended-state="0" />
@@ -649,7 +695,7 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/API/api.py">
+    <entry file="file://$PROJECT_DIR$/api/api.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
@@ -657,7 +703,7 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/API/api_tests.py">
+    <entry file="file://$PROJECT_DIR$/api/api_tests.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
@@ -665,7 +711,7 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/API/user.py">
+    <entry file="file://$PROJECT_DIR$/api/user.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
