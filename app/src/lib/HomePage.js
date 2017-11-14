@@ -7,6 +7,7 @@ import {
 import Navigator from './Navigator';
 import { colorScheme } from "./ColorScheme";
 import LoginPage from '../containers/LoginPage/LoginPage';
+import LoginForm from "../components/LoginPage/LoginForm";
 
 
 class HomePage extends Component {
@@ -21,7 +22,7 @@ class HomePage extends Component {
                 <StatusBar
                     barStyle={'light-content'}/>
                 <View style={{height, backgroundColor: colorScheme.secondary}} />
-                <Navigator/>
+                <LoginPage/>
             </View>
         )
     }
