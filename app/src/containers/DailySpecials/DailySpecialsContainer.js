@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import Page from '../../components/SmallHeaderPage/SmallHeaderPage';
-import { colorScheme } from "../../lib/ColorScheme";
+import { colorScheme } from "../../lib/styles/ColorScheme";
 import Icon from 'react-native-vector-icons/FontAwesome';
 
 class DailySpecials extends Component {

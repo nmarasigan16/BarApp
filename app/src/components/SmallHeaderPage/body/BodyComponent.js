@@ -3,7 +3,7 @@ import {
     View,
     Dimensions,
 } from 'react-native';
-import { colorScheme } from "../../../lib/ColorScheme";
+import { colorScheme } from "../../../lib/styles/ColorScheme";
 
 const BodyComponent = ({content}) => {
     const { width, height } = Dimensions.get('window');

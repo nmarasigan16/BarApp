@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import Page from '../../components/LargeHeaderPage/PageComponent';
 import Icon from 'react-native-vector-icons/FontAwesome';
-import { colorScheme } from "../../lib/ColorScheme";
+import { colorScheme } from "../../lib/styles/ColorScheme";
 
 
 class BarProfileContainer extends Component {
