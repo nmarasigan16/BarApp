@@ -6,8 +6,8 @@ import {
 } from 'react-native';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import Text from '../general/text/TextComponent';
-import { colorScheme } from "../../lib/ColorScheme";
-import { LogoStyle } from "../../lib/LogoStyle";
+import { colorScheme } from "../../lib/styles/ColorScheme";
+import { LogoStyle } from "../../lib/styles/LogoStyle";
 
 const NavigationBar = ({nav}) => {
     const { width, height } = Dimensions.get('window');

@@ -6,7 +6,7 @@ import {
 } from 'react-native';
 import { responsiveFontSize } from 'react-native-responsive-dimensions';
 import Text from '../../general/text/TextComponent';
-import { colorScheme } from "../../../lib/ColorScheme";
+import { colorScheme } from "../../../lib/styles/ColorScheme";
 
 const HeaderComponent = ({name='Legends'}) => {
     const { width, height } = Dimensions.get('window');

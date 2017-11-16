@@ -5,9 +5,10 @@ import {
     Platform
 } from 'react-native';
 import Navigator from './Navigator';
-import { colorScheme } from "./ColorScheme";
-import LoginPage from '../containers/LoginPage/LoginPage';
-import LoginForm from "../components/LoginPage/LoginForm";
+import { colorScheme } from "../styles/ColorScheme";
+import LoginPage from '../../containers/LoginPage/LoginPage';
+import LoginForm from "../../components/LoginPage/LoginForm";
+import NavigationBar from "../../components/NavigationBar/NavigationBarComponent";
 
 
 class HomePage extends Component {

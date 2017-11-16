@@ -9,7 +9,7 @@ import { phonecall } from 'react-native-communications';
 import openMap from 'react-native-open-maps';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import Text from '../../general/text/TextComponent';
-import { colorScheme } from "../../../lib/ColorScheme";
+import { colorScheme } from "../../../lib/styles/ColorScheme";
 
 class AdditionalInfoComponent extends Component {
     constructor(props) {

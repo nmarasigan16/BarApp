@@ -5,10 +5,10 @@ import {
     Button,
     Animated,
 } from 'react-native';
-import { colorScheme } from "../../lib/ColorScheme";
-import { LogoStyle } from "../../lib/LogoStyle";
+import { colorScheme } from "../../lib/styles/ColorScheme";
+import { LogoStyle } from "../../lib/styles/LogoStyle";
 import Text from '../../components/general/text/TextComponent';
-import LoginForm from '../../components/LoginPage/LoginForm';
+import LoginLayout from '../../components/LoginPage/LoginLayout';
 
 class LoginPage extends Component {
     constructor(props) {
@@ -64,7 +64,7 @@ class LoginPage extends Component {
                         <Animated.View style={{
                             opacity: fadeAnim
                         }}>
-                            <LoginForm/>
+                            <LoginLayout/>
                         </Animated.View> : null}
                 </View>
             </View>
