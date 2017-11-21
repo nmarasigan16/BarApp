@@ -4,7 +4,6 @@ import {
     View
 } from 'react-native';
 import TextInput from 'react-native-material-textinput';
-import { validators } from "../../../lib/validators";
 import Text from '../text/TextComponent';
 import {colorScheme} from "../../../lib/styles/ColorScheme";
 
@@ -13,6 +12,7 @@ class ValidatedTextInput extends Component{
         super(props);
 
         this.state = {
+            name: props.name,
             value: props.value || '',
             initialValue : props.value || '',
             validators: props.validators || [],
@@ -25,6 +25,8 @@ class ValidatedTextInput extends Component{
         this._isValid = this._isValid.bind(this);
         this.validateInput = this.validateInput.bind(this);
         this.checkDirty = this.checkDirty.bind(this);
+        this.getName = this.getName.bind(this);
+        this.getData = this.getData.bind(this);
     }
 
     validateInput(input){
@@ -41,9 +43,22 @@ class ValidatedTextInput extends Component{
         this.setState({valid});
     }
 
+    getName(){
+        return this.state.name;
+    }
+
     // an override for the parentComponent to make errors display if they cannot submit
-    setDirty(input){
+    getData(){
+        const {
+            value,
+            valid
+        } = this.state;
+        this.validateInput(this.state.value);
         this.setState({dirty: true});
+        return {
+            value,
+            valid
+        };
     }
 
     checkDirty(input){

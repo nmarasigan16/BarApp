@@ -5,8 +5,11 @@
     Number range exclusive, from low to high. To not put a min, put undefined for it
  */
 export const numberRange = (low, high) => (input) => {
-    if(isNaN(input)){
-        return false;
+    if(isNaN(input)) {
+        return {
+            valid: false,
+            errorMessage: 'Please enter a valid number'
+        };
     }
     const num = +input;
     return {
@@ -17,7 +20,10 @@ export const numberRange = (low, high) => (input) => {
 
 export const minNumber = (low) => (input) => {
     if(isNaN(input)){
-        return false;
+        return {
+            valid: false,
+            errorMessage: 'Please enter a valid number'
+        };
     }
     const num = +input;
     return {
@@ -27,12 +33,15 @@ export const minNumber = (low) => (input) => {
 };
 
 export const maxNumber = (high) => (input) => {
-    if(isNaN(input)){
-        return false;
+    if(isNaN(input)) {
+        return {
+            valid: false,
+            errorMessage: 'Please enter a valid number'
+        };
     }
     const num = +input;
     return {
-        valid: num >= high,
+        valid: num <= high,
         errorMessage: `Please enter a number below ${high}`
     };
 };
@@ -79,7 +88,7 @@ export const pattern = (re, errorMessage) => (input) => {
 
 export const isRequired = (input) => {
     return {
-        valid: input,
+        valid: input.length > 0,
         errorMessage: 'This field is required',
     };
 };

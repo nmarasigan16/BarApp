@@ -9,7 +9,7 @@ import { colorScheme } from "../../lib/styles/ColorScheme";
 import Divider from '../general/divider/DividerComponent';
 import TextComponent from '../general/text/TextComponent';
 import FacebookLogin from './FacebookLogin';
-import LoginForm from './LoginForm';
+import LoginForm from '../../containers/Forms/LoginForm';
 
 
 class LoginLayout extends Component {
@@ -39,17 +39,6 @@ class LoginLayout extends Component {
                     <Divider style={{width: width / 6, alignSelf: 'center'}}/>
                 </View>
                 <LoginForm/>
-                <TouchableOpacity onPress={this.onLogin}>
-                    <TextComponent
-                        style={{
-                            textAlign: 'center',
-                            color: colorScheme.accent,
-                            fontSize: width / 20,
-                            marginTop: height / 30
-                        }}>
-                        login
-                    </TextComponent>
-                </TouchableOpacity>
                 <TouchableOpacity>
                     <TextComponent
                         style={{
