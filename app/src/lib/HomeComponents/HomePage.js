@@ -7,7 +7,7 @@ import {
 import Navigator from './Navigator';
 import { colorScheme } from "../styles/ColorScheme";
 import LoginPage from '../../containers/LoginPage/LoginPage';
-import LoginForm from "../../components/LoginPage/LoginForm";
+import LoginForm from "../../containers/Forms/LoginForm";
 import NavigationBar from "../../components/NavigationBar/NavigationBarComponent";
 
 

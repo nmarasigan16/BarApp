@@ -8,6 +8,7 @@
   },
   "dependencies": {
     "react": "16.0.0-beta.5",
+    "react-dom": "^16.1.1",
     "react-native": "0.49.3",
     "react-native-communications": "^2.2.1",
     "react-native-material-kit": "^0.4.1",
@@ -24,18 +25,22 @@
   },
   "devDependencies": {
     "babel-jest": "21.2.0",
+    "babel-preset-env": "^1.6.1",
     "babel-preset-react-native": "4.0.0",
-    "enzyme": "^3.1.0",
+    "enzyme": "^3.2.0",
+    "enzyme-adapter-react-16": "^1.1.0",
     "eslint": "^4.11.0",
     "eslint-config-react-native": "^1.6.0",
     "eslint-plugin-react-native": "^3.1.0",
     "jest": "^21.2.1",
     "prop-types": "^15.6.0",
+    "react-native-mock": "^0.3.1",
     "react-test-renderer": "16.0.0-beta.5",
     "redux-mock-store": "^1.3.0"
   },
   "jest": {
     "preset": "react-native",
+    "setupTestFrameworkScriptFile": "./.enzymeConfig.js",
     "transformIgnorePatterns": [
       "node_modules/(?!(jest-)?react-native|react-navigation)"
     ]

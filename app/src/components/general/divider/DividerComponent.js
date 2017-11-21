@@ -4,7 +4,7 @@ import { View, StyleSheet } from 'react-native';
 let styles = {};
 
 const Divider = ({ style }) =>
-      <View style={[styles.container, style && style]} />;
+      <View style={[styles.container, style]} />;
 
 styles = StyleSheet.create({
       container: {
