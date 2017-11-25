@@ -38,7 +38,7 @@ class LoginLayout extends Component {
                     </View>
                     <Divider style={{width: width / 6, alignSelf: 'center'}}/>
                 </View>
-                <LoginForm/>
+                <LoginForm nav={this.props.nav}/>
                 <TouchableOpacity>
                     <TextComponent
                         style={{

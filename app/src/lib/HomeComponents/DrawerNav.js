@@ -3,7 +3,7 @@ import Specials from '../../containers/DailySpecials/DailySpecialsContainer';
 import Bar from '../../containers/BarProfile/BarProfileContainer';
 import { DrawerNavigator } from 'react-navigation';
 
-const Navigator = DrawerNavigator({
+const DrawerNav = DrawerNavigator({
     Specials: {
         screen: Specials,
     },
@@ -15,4 +15,4 @@ const Navigator = DrawerNavigator({
         drawerPosition: 'left',
 });
 
-export default Navigator;
+export default DrawerNav;

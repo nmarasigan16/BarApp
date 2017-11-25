@@ -17,8 +17,14 @@ class LoginForm extends Component {
         this.onLogin = this.onLogin.bind(this);
     }
 
+    static navigationOptions = {
+        title: 'Login'
+    };
+
+
     onLogin() {
-        console.log(this.form.setData());
+        this.props.nav.navigate('Home');
+        console.log(this.form.getData());
     }
 
     render() {
@@ -28,14 +34,11 @@ class LoginForm extends Component {
             <View>
                 <Form ref={(form) => {this.form = form;}}>
                     <ValidatedTextInput
-                        ref={(username) => {this.username = username;}}
                         name={'username'}
                         color={colorScheme.accent}
                         label={'Username'}
                         labelColor={colorScheme.accent}
-                        value={username}
                         autoCapitalize = {'none'}
-                        onChangeText={(username) => this.setState({username})}
                         validators={[validators.email]}
                         errorMessage={'hello'}
                     />
@@ -45,8 +48,6 @@ class LoginForm extends Component {
                         label={'Password'}
                         labelColor={colorScheme.accent}
                         secureTextEntry={true}
-                        onChangeText={(password) => this.setState({password})}
-                        value={password}
                     />
                 </Form>
                 <TouchableOpacity onPress={this.onLogin}>
