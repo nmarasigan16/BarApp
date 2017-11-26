@@ -8,6 +8,10 @@ Currently supported inputs include:
 + `ValidatedForm`_
 + `TextInput`_
 
+This document also includes a few helpful how tos, such as:
+
++ `Writing your own validators`_
+
 .. _Form:
 
 ValidatedForm
@@ -74,6 +78,7 @@ Utilizes `react-native-md-textinput`_ to provide a styled TextInput that validat
             - name
                 The name for the field.  This will be used when it returns data
         *Optional/Other*
+            - `Validators`_ (functions that will validate your input)
             - All props accepted by the `native TextInput`_
             - All props accepted by `react-native-md-textinput`_
 
@@ -91,6 +96,7 @@ Usage
 
     ...
     import ValidatedTextInput from 'path/to/ValidatedTextInput';
+    import { validators } from 'path/to/validators';
     ...
     handlePress(e) {
         const data = this.input.data;
@@ -100,11 +106,57 @@ Usage
         <ValidatedTextInput
             ref={(input) => {this.input = input;}}
             name={'username'}
+            validators=[validators.maxNumber(5)]
             label={'Username'}
         />
         <Button onPress={this.handlePress}/>
     </View>
 
+.. _Validators:
+
+Validators
+==========
+
+There are several built in validators included.  They are:
+
++ numberRange(low, high)
++ minNumber(low)
++ maxNumber(high)
++ maxCharacters(high)
++ minCharacters(low)
++ email
++ pattern(pattern, errorMessage)
++ isRequired
+
+They are supported by all the validated inputs.
+
+
+.. _Writing your own validators:
+
+Writing Your Own Validators
+---------------------------
+
+Writing your own validators is fairly simple process.  In order to make a validator, your validator must take in one argument (the input) and must output a response in the form of:
+
+.. code-block:: javascript
+
+   {
+      valid: <boolean>
+      errorMessage: <string>
+   }
+
+It's good to keep in mind that if you want your validator to take arguments you can curry your validators like so (ES6):
+
+.. code-block:: javascript
+
+   const myValidator = (arg1, arg2) => (input) => {
+        return {
+            valid: true
+            errorMessage: 'This is never invalid. How did you manage this?'
+        }
+
+In addition, most validators can be achieved with the built-in pattern validator which takes in a regular expression and errorMessage to create a validator.
+
 .. _Material Design: https://material.io/guidelines/
-.. _react-native-md-textinput: https://github.com/evblurbs/react-native-md-textinput
+.. _react-native-md-textinput: https://github.com/perushevandkhmelev-agency/react-native-material-textinput
 .. _native TextInput: https://facebook.github.io/react-native/docs/textinput.html
