@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { StackNavigator } from 'react-navigation';
 import DrawerNav from './DrawerNav';
 import LoginPage from '../../containers/LoginPage/LoginPage';
+import RegistrationPage from '../../containers/RegistrationPage/RegistrationPage';
 
 const StackNav = StackNavigator({
     Home: {
@@ -13,6 +14,9 @@ const StackNav = StackNavigator({
     Login: {
         screen: LoginPage,
     },
+    Register: {
+        screen: RegistrationPage
+    }
 },
     {
         initialRouteName: 'Login',

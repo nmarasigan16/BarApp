@@ -40,14 +40,13 @@ class LoginForm extends Component {
                         labelColor={colorScheme.accent}
                         autoCapitalize = {'none'}
                         validators={[validators.email]}
-                        errorMessage={'hello'}
                     />
                     <ValidatedTextInput
                         color={colorScheme.accent}
                         name={'password'}
                         label={'Password'}
                         labelColor={colorScheme.accent}
-                        secureTextEntry={true}
+                        secureTextEntry
                     />
                 </Form>
                 <TouchableOpacity onPress={this.onLogin}>

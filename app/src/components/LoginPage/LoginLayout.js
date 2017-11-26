@@ -39,7 +39,7 @@ class LoginLayout extends Component {
                     <Divider style={{width: width / 6, alignSelf: 'center'}}/>
                 </View>
                 <LoginForm nav={this.props.nav}/>
-                <TouchableOpacity>
+                <TouchableOpacity onPress={(e) => {this.props.nav.navigate('Register')}}>
                     <TextComponent
                         style={{
                             textAlign: 'center',

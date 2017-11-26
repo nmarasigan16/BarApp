@@ -87,12 +87,16 @@ class ValidatedTextInput extends Component{
         const { valid, dirty, value, errorMessage } = this.state;
         const { _onChangeText } = this;
 
+        let dupProps = JSON.parse(JSON.stringify(this.props));
+        dupProps.activeColor = dupProps.activeColor || colorScheme.logoColor;
+        dupProps.color = dupProps.color || colorScheme.accent;
+
         return (
             <View style={{flexDirection: 'column'}}>
                 <TextInput
-                    {...this.props}
                     onChangeText={_onChangeText}
                     value={value}
+                    {...dupProps}
                 />
                 {!valid && dirty ?
                     <Text style={{color: colorScheme.warn}}>
