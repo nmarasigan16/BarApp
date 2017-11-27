@@ -18,7 +18,7 @@ class RegistrationPage extends Component {
         return (
             <Page
                 name={'Register'}>
-                <RegistrationForm/>
+                <RegistrationForm nav={this.props.navigation}/>
             </Page>
         );
     }

@@ -90,6 +90,7 @@ class ValidatedTextInput extends Component{
         let dupProps = JSON.parse(JSON.stringify(this.props));
         dupProps.activeColor = dupProps.activeColor || colorScheme.logoColor;
         dupProps.color = dupProps.color || colorScheme.accent;
+        dupProps.labelColor = dupProps.labelColor || colorScheme.accent;
 
         return (
             <View style={{flexDirection: 'column'}}>
