@@ -3,14 +3,21 @@
 import flask
 import datetime
 import sys, traceback
+import requests
 
 from user import User
 from bar import Bar
+from db_ops import DBOperations
 from flask import Flask, jsonify, request, make_response
 from flask_pymongo import PyMongo
 from flask_bcrypt import Bcrypt
-from db_ops import DBOperations
+from validate_email import validate_email
 
+app_id = '1977845439150436'
+app_secret = 'f0b983e1471377f2a3f1eab8d3813ca3'
+redirect_uri = 'outwithbarcode.com?'
+user_url = 'https://graph.facebook.com/me?'
+oauth_url = 'https://www.facebook.com/v2.11/dialog/oauth?'
 
 __name__ = 'BarApp'
 app = Flask(__name__)
@@ -69,8 +76,8 @@ def login():
     try:
         user = db_ops.check_bar_user_db(content['username'])
         if user and bcrypt.check_password_hash(
-            user[1]['password'], content['password']):
-            auth_token = User.encode_auth_token(user[1]['username'])
+            user['password'], content['password']):
+            auth_token = User.encode_auth_token(user['username'])
             if auth_token:
                 responseObject = {
                     'status': 'success',
@@ -147,17 +154,17 @@ def status():
         if isinstance(resp, str):
             user = db_ops.check_bar_user_db(resp)
             try:
-                if user[0] == 'User':
+                if not user['isbar']:
                     responseObject = {
                         'status': 'success',
-                        'username': user[1]['username'],
+                        'username': user['username'],
                         'bar': False
                     }
                     return make_response(jsonify(responseObject)), 200
-                elif user[0] == 'Bar':
+                elif user['isbar']:
                     responseObject = {
                         'status': 'success',
-                        'username': user[1]['username'],
+                        'username': user['username'],
                         'bar': True
                     }
                     return make_response(jsonify(responseObject)), 200
@@ -185,4 +192,47 @@ def status():
             'message': 'Provide a valid auth token.'
         }
         return make_response(jsonify(responseObject)), 403
+
+@app.route('/fblogin', methods=['POST'])
+def fblogin():
+    content = request.get_json()
+    code = content['code']
+    payload = {'client_id': app_id, 'redirect_uri' : redirect_uri, 'client_secret': app_secret, 'code':code}
+    resp = requests.get(oauth_url, params = payload)
+    token = resp.json()['access_token']
+    payload = {'access_token':token}
+    resp = requests.get(user_url, params = payload)
+    resp = resp.json()
+    user = db_ops.check_bar_user_db(resp['email'])
+    if user:
+        auth_token = User.encode_auth_token(user['username'])
+        if auth_token:
+            responseObject = {
+                'status': 'success',
+                'message': 'Successfully logged in.',
+                'auth_token': auth_token.decode()
+            }
+            return make_response(jsonify(responseObject)), 200
+        else:
+            responseObject = {
+            'status': 'fail',
+            'message': 'Try again'
+            }
+            return make_response(jsonify(responseObject)), 500
+    else:
+        user = User(resp['email'], None, resp['first_name'], resp['age'], resp['genger'], bc)
+        auth_token = user.encode_auth_token(user.username)
+        if auth_token:
+            responseObject = {
+                'status': 'success',
+                'message': 'Successfully logged in.',
+                'auth_token': auth_token.decode()
+            }
+            return make_response(jsonify(responseObject)), 200
+        else:
+            responseObject = {
+            'status': 'fail',
+            'message': 'Try again'
+            }
+            return make_response(jsonify(responseObject)), 500
 # app.run(debug=True)

@@ -1,6 +1,7 @@
 import json
 import unittest
 from api import app
+from unittest.mock import Mock, patch
 
 class ApiTest(unittest.TestCase):
     def setUp(self):
@@ -8,7 +9,7 @@ class ApiTest(unittest.TestCase):
 
     def test_registered_user(self):
         headers = [('Content-Type', 'application/json')]
-        data = {'username': 'test_person1', 'password':"123456", 'name': "TEST" ,
+        data = {'username': 'test@gmail.com', 'password':"123456", 'name': "TEST" ,
                 'age':1, 'gender':'M', 'bar':False}
         json_data = json.dumps(data)
         json_data_length = len(json_data)
@@ -23,7 +24,7 @@ class ApiTest(unittest.TestCase):
 
     def test_registered_bar(self):
         headers = [('Content-Type', 'application/json')]
-        data = {'username': 'test_bar1', 'password':"123456", 'name': "TEST" ,
+        data = {'username': 'bar@gmail.com', 'password':"123456", 'name': "TEST" ,
                 'location':"1", 'phone':'1233453453', 'bar':True}
         json_data = json.dumps(data)
         json_data_length = len(json_data)
@@ -83,6 +84,10 @@ class ApiTest(unittest.TestCase):
         self.assertTrue(data['username'] == 'test_person')
         self.assertTrue(data['bar'] == False)
         response = self.app.post('/logout', headers=headers)
+
+    # @requests_mock.mock()
+    # def test_fblogin(self, m):
+    #     m.get('')
 
 if __name__ == "__main__":
     unittest.main()
