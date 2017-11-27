@@ -4,11 +4,8 @@ import {
     StatusBar,
     Platform
 } from 'react-native';
-import Navigator from './Navigator';
+import Navigator from './StackNav';
 import { colorScheme } from "../styles/ColorScheme";
-import LoginPage from '../../containers/LoginPage/LoginPage';
-import LoginForm from "../../containers/Forms/LoginForm";
-import NavigationBar from "../../components/NavigationBar/NavigationBarComponent";
 
 
 class HomePage extends Component {
@@ -23,7 +20,7 @@ class HomePage extends Component {
                 <StatusBar
                     barStyle={'light-content'}/>
                 <View style={{height, backgroundColor: colorScheme.secondary}} />
-                <LoginPage/>
+                <Navigator/>
             </View>
         )
     }

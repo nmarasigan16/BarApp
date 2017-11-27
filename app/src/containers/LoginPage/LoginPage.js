@@ -20,6 +20,10 @@ class LoginPage extends Component {
         this.updateShowLogin = this.updateShowLogin.bind(this);
     }
 
+    static navigationOptions = {
+        header: null
+    };
+
     updateShowLogin(event) {
         this.setState((prevState) => {
             return Object.assign({}, prevState, {showLogin: true})
@@ -35,6 +39,7 @@ class LoginPage extends Component {
 
     render() {
         const { showLogin, fadeAnim } = this.state;
+        const { navigation } = this.props;
         const { width, height } = Dimensions.get('window');
         const viewStyle = {
             flex: 1,
@@ -64,12 +69,12 @@ class LoginPage extends Component {
                         <Animated.View style={{
                             opacity: fadeAnim
                         }}>
-                            <LoginLayout/>
+                            <LoginLayout nav={navigation}/>
                         </Animated.View> : null}
                 </View>
             </View>
         )
     }
-};
+}
 
 export default LoginPage;
