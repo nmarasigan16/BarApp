@@ -18,6 +18,7 @@ BarCode is a native application for iOS and Android.  Through our application, b
    :caption: Contents:
 
    functionality/index
+   components/index
    api/index
 
 .. |salsa| unicode:: U+1F483
