@@ -8,7 +8,7 @@ import {
 import { NavigationActions } from 'react-navigation';
 import { colorScheme } from "../../lib/styles/ColorScheme";
 import Text from '../../components/general/text/TextComponent';
-import Form from '../../components/general/ValidatedTextInput/ValidatedTextForm';
+import Form from '../../components/general/ValidatedTextInput/ValidatedForm';
 import TextInput from '../../components/general/ValidatedTextInput/ValidatedTextInput';
 import Dropdown from '../../components/general/ValidatedTextInput/ValidatedDropdown';
 import { validators } from "../../lib/validators";
