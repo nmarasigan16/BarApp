@@ -106,6 +106,7 @@ class ValidatedTextInput extends Component{
 }
 
 ValidatedTextInput.propTypes = {
+    name: PropTypes.string.isRequired,
     onChangeText: PropTypes.func,
     validators: PropTypes.arrayOf(PropTypes.func),
     value: PropTypes.string,

@@ -8,7 +8,7 @@ import Text from '../text/TextComponent';
 import {colorScheme} from "../../../lib/styles/ColorScheme";
 
 
-class ValidatedTextForm extends Component {
+class ValidatedForm extends Component {
     constructor(props) {
         super(props);
         this.children = [];
@@ -51,5 +51,9 @@ class ValidatedTextForm extends Component {
     }
 }
 
+ValidatedForm.propTypes = {
+    children: PropTypes.array
+};
 
-export default ValidatedTextForm
+
+export default ValidatedForm

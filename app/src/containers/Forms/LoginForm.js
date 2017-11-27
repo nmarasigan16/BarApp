@@ -8,7 +8,7 @@ import { colorScheme } from "../../lib/styles/ColorScheme";
 import ValidatedTextInput from "../../components/general/ValidatedTextInput/ValidatedTextInput";
 import { validators } from "../../lib/validators";
 import TextComponent from '../../components/general/text/TextComponent';
-import Form from '../../components/general/ValidatedTextInput/ValidatedTextForm';
+import Form from '../../components/general/ValidatedTextInput/ValidatedForm';
 
 
 class LoginForm extends Component {
@@ -18,7 +18,7 @@ class LoginForm extends Component {
     }
 
     onLogin() {
-        console.log(this.form.setData());
+        console.log(this.form.getData());
     }
 
     render() {
