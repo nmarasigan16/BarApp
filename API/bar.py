@@ -5,8 +5,8 @@ import jwt
 BCRYPT_LOG_ROUNDS = 13
 SECRET_KEY = "supersecret"
 
-class User:
-    def __init__(self, username, password, name, age, gender, bc, specials = None):
+class Bar:
+    def __init__(self, username, password, name, location, phone, bc, specials = None):
         """
         Initializes the user object
         """
@@ -14,8 +14,8 @@ class User:
         self.password = bc.generate_password_hash(
             password, BCRYPT_LOG_ROUNDS).decode('utf-8')
         self.name = name
-        self.age = age
-        self.gender = gender
+        self.location = location
+        self.phone = phone
         self.specials = specials
 
     @staticmethod
