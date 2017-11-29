@@ -199,10 +199,11 @@ def fblogin():
     code = content['code']
     payload = {'client_id': app_id, 'redirect_uri' : redirect_uri, 'client_secret': app_secret, 'code':code}
     resp = requests.get(oauth_url, params = payload)
-    token = resp.json()['access_token']
+    print(resp)
+    token = resp.get_json()['access_token']
     payload = {'access_token':token}
     resp = requests.get(user_url, params = payload)
-    resp = resp.json()
+    resp = resp.get_json()
     user = db_ops.check_bar_user_db(resp['email'])
     if user:
         auth_token = User.encode_auth_token(user['username'])
@@ -220,7 +221,7 @@ def fblogin():
             }
             return make_response(jsonify(responseObject)), 500
     else:
-        user = User(resp['email'], None, resp['first_name'], resp['age'], resp['genger'], bc)
+        user = User(resp['email'], None, resp['first_name'], resp['age'], resp['gender'], bc)
         auth_token = user.encode_auth_token(user.username)
         if auth_token:
             responseObject = {
@@ -228,6 +229,7 @@ def fblogin():
                 'message': 'Successfully logged in.',
                 'auth_token': auth_token.decode()
             }
+            db_ops.add_user_to_db(user)
             return make_response(jsonify(responseObject)), 200
         else:
             responseObject = {
