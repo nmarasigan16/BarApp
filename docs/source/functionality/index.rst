@@ -36,8 +36,26 @@ Application Front-End
 API
 ---
 
++ Registration Endpoint
+
+  + Registers a new user into database |check|
+
 + Login Endpoint
-  
+
+  + Logs in a user |check|
+
++ Logout Endpoint
+
+  + Logs out a user makes token invalid |check|
+
++ Facebook Login Endpoint
+
+  + Handles Facebook login and ensures user information |WIP|
+
++ User status Endpoint
+
+  + Checks if the user is logged in or not |check|
+
 .. |check| unicode:: U+2713
 .. |WIP| unicode:: U+1F680
 .. |x| unicode:: U+2717
