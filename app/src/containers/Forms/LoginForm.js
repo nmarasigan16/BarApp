@@ -23,8 +23,10 @@ class LoginForm extends Component {
 
 
     onLogin() {
-        this.props.nav.navigate('Home');
-        console.log(this.form.getData());
+        const data = this.form.getData();
+        if(data.valid){
+            this.props.nav.navigate('Home');
+        }
     }
 
     render() {
@@ -47,6 +49,7 @@ class LoginForm extends Component {
                         label={'Password'}
                         labelColor={colorScheme.accent}
                         secureTextEntry
+                        validators={[validators.isRequired]}
                     />
                 </Form>
                 <TouchableOpacity onPress={this.onLogin}>
