@@ -27,10 +27,9 @@ export const makeGetRequest = (uri, dataCallback, successCallback=[], params={})
         {
             headers: formatHeaders(authState)
         })
-            .then(
-                response => response.json()
-            )
-            .then(
+        .then(
+            response => {
+                response.json().then(
                 json => {
                     dispatch(fetchItemSuccess());
                     dispatch(dataCallback(json));
@@ -39,19 +38,21 @@ export const makeGetRequest = (uri, dataCallback, successCallback=[], params={})
                             dispatch(callback());
                         });
                     }
-                }
-            )
-            .catch(
-                error => {
-                    console.log(uri);
-                    dispatch(fetchItemError(error));
-                }
-            );
+                })
+            }
+        )
+        .catch(
+            error => {
+                dispatch(fetchItemError(error));
+            }
+        );
+
 };
 
-export const makePostRequest = (uri, dataCallback, successCallback=[], params={}) => (dispatch, getState) => {
+export const makePostRequest = (uri, dataCallback, successCallback=[], params={}, body={}) => (dispatch, getState) => {
     const uriWithParams = makeUrl(uri, params);
     const authState = getState().auth;
+    body = JSON.stringify(body);
     let headers = {
         'Accept': 'application/json'
     };
@@ -59,29 +60,32 @@ export const makePostRequest = (uri, dataCallback, successCallback=[], params={}
     return fetch(uriWithParams,
         {
             method: 'POST',
-            headers: formatHeaders(authState, headers)
+            headers: formatHeaders(authState, headers),
+            body,
         })
         .then(
-            response => response.json()
-        ).then(
-            json => {
-                dispatch(fetchItemSuccess());
-                dispatch(dataCallback(json));
-                if(successCallback[0] != null) {
-                    successCallback.forEach((callback) => {
-                        dispatch(callback());
-                    });
-                }
+            response => {
+                response.json().then(
+                json => {
+                    dispatch(fetchItemSuccess());
+                    dispatch(dataCallback(json));
+                    if(successCallback[0] != null) {
+                        successCallback.forEach((callback) => {
+                            dispatch(callback());
+                        });
+                    }
+                })
             }
         )
         .catch(
-            error => console.log(error)
+            error => dispatch(fetchItemError(error))
         )
 };
 
-export const makePutRequest = (uri, dataCallback, successCallback=[], params={}) => (dispatch, getState) => {
+export const makePutRequest = (uri, dataCallback, successCallback=[], params={}, body={}) => (dispatch, getState) => {
     const uriWithParams = makeUrl(uri, params);
     const authState = getState().auth;
+    body = JSON.stringify(body);
     const putHeaders = {
         'Content-Length': 0
     };
@@ -89,7 +93,8 @@ export const makePutRequest = (uri, dataCallback, successCallback=[], params={})
     return fetch(uriWithParams,
         {
             method: 'PUT',
-            headers: formatHeaders(authState, putHeaders)
+            headers: formatHeaders(authState, putHeaders),
+            body
         })
         .then(
             response => {
@@ -131,36 +136,16 @@ export const makeDeleteRequest = (uri, dataCallback, successCallback=[], params=
             }
         )
         .catch(
-            error => console.log(error)
-        )
-};
-
-export const checkStatus = (uri, dataCallback, successCallback=[], params={}) => (dispatch, getState) => {
-    const uriWithParams = makeUrl(uri, params);
-    const authState = getState().auth;
-    dispatch(fetchItem());
-    return fetch(uriWithParams,
-        {
-            headers: formatHeaders(authState)
-        })
-        .then(
-            response => {
-                dispatch(fetchItemSuccess());
-                dispatch(dataCallback(response));
-                if (successCallback[0] != null) {
-                    successCallback.forEach((callback) => {
-                        dispatch(callback());
-                    });
-                }
-            }
-        )
-        .catch(
-            error => console.log(error)
+            error => dispatch(fetchItemError(error))
         )
 };
 
 export default apiActionCreators = Object.assign({}, {
     fetchItem,
     fetchItemError,
-    fetchItemSuccess
+    fetchItemSuccess,
+    makeGetRequest,
+    makePutRequest,
+    makePostRequest,
+    makeDeleteRequest,
 });

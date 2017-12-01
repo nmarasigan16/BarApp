@@ -34,6 +34,17 @@ it('renders without location or telephone', () => {
     expect(tree).toMatchSnapshot();
 });
 
+it('renders with shortcode telephone', () => {
+    const tree = renderer.create(
+        <Header
+            name={'Legends'}
+            telephone={'3557674'}
+        />
+    ).toJSON();
+
+    expect(tree).toMatchSnapshot()
+});
+
 it('renders without location', () => {
     const tree = renderer.create(
         <Header
