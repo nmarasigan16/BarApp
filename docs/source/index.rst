@@ -10,7 +10,7 @@ Welcome to BarCode's documentation!
 
 ------------------------------------------------------------
 
-BarCode is a native application for iOS and Android.  Through our application, bar-goers and clubbers can preview venues before they go, and bar managers and owners can make informed marketing decisions. 
+BarCode is a native application for iOS and Android.  Through our application, bar-goers and clubbers can preview venues before they go, and bar managers and owners can make informed marketing decisions.
 
 
 .. toctree::
