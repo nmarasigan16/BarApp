@@ -4,11 +4,13 @@ import {
     Dimensions,
     Button,
     Animated,
+    Linking,
 } from 'react-native';
 import { colorScheme } from "../../lib/styles/ColorScheme";
 import { LogoStyle } from "../../lib/styles/LogoStyle";
 import Text from '../../components/general/text/TextComponent';
 import LoginLayout from '../../components/LoginPage/LoginLayout';
+import { parseUrl } from "../../lib/url/urlTools";
 
 class LoginPage extends Component {
     constructor(props) {
@@ -23,6 +25,20 @@ class LoginPage extends Component {
     static navigationOptions = {
         header: null
     };
+
+    componentDidMount() {
+        Linking.addEventListener('url', this._handleOpenUrl);
+    }
+
+
+    componentWillUnmount() {
+        Linking.removeEventListener('url', this._handleOpenUrl);
+    }
+
+    _handleOpenUrl(event) {
+        const parsedUrl = parseUrl(event.url);
+        console.log(parsedUrl);
+    }
 
     updateShowLogin(event) {
         this.setState((prevState) => {

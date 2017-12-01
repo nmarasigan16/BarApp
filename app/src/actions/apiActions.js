@@ -1,39 +1,10 @@
-import { apiActionTypes as actionTypes } from './actionTypes';
+import {apiActionTypes as actionTypes} from './actionTypes';
+import {formatHeaders, makeUrl} from "../lib/url/urlTools";
 
 export const API_ROOT = '';
-export const FACEBOOK_API_ROOT = ''
+export const FACEBOOK_API_ROOT = '';
 
 //Helper functions
-function makeParam(param, val) {
-    return `${param}=${val}`;
-}
-
-function formatParams(params) {
-    if(Object.keys(params).length === 0){
-        return '';
-    }
-    let keys = Object.keys(params);
-    let paramString = '?';
-    paramString += makeParam(keys[0], params[keys[0]]);
-    keys = keys.slice(1);
-    keys.forEach( (param) => {
-        paramString += `&${makeParam(param, params[param])}`;
-    });
-    return paramString;
-}
-
-export function makeUrl(url, params={}){
-    return url + formatParams(params)
-}
-
-function formatHeaders(authState, otherHeaders={}) {
-    headers = {};
-    if(authState.token){
-        headers['Authorization'] = `token ${authState.token}`;
-    }
-    headers = Object.assign({}, otherHeaders, headers);
-    return headers;
-}
 
 export const fetchItem = () => ({
         type: actionTypes.fetchItem,

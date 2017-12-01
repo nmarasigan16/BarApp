@@ -7,7 +7,7 @@ import {
     Linking,
 } from 'react-native'
 import Icon from 'react-native-vector-icons/FontAwesome';
-import { makeUrl } from "../../actions/apiActions";
+import { makeUrl } from "../../lib/url/urlTools";
 
 const CLIENT_ID = '1977845439150436';
 
@@ -20,7 +20,7 @@ class FacebookLogin extends Component {
         let uri = 'https://www.facebook.com/v2.11/dialog/oauth';
         const params = {
             client_id: CLIENT_ID,
-            redirect_uri: 'https://outwithbarcode.com'
+            redirect_uri: 'fb1977845439150436://authorize'
         };
         uri = makeUrl(uri, params);
         Linking.openURL(uri);

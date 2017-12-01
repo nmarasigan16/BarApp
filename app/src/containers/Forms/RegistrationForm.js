@@ -61,6 +61,12 @@ class RegistrationForm extends Component {
                         label={'Age'}
                         name={'age'}
                         validators={[validators.minNumber(18), validators.isRequired]}/>
+                    <TextInput
+                        label={'Password'}
+                        name={'password'}
+                        validators={[validators.isRequired]}
+                        secureTextEntry
+                    />
                 </Form>
                 <View style={{flexDirection: 'row', justifyContent: 'flex-end'}}>
                     <TouchableOpacity onPress={this.returnToLogin}>

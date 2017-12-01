@@ -3,24 +3,16 @@ import React from 'react';
 import * as actions from '../../src/actions/apiActions';
 import actionTypes from '../../src/actions/actionTypes';
 import configureMockStore from 'redux-mock-store';
-import {makeUrl} from "../../src/actions/apiActions";
 import {fetchItemError} from "../../src/actions/apiActions";
 import {fetchItem} from "../../src/actions/apiActions";
 import {fetchItemSuccess} from "../../src/actions/apiActions";
+import * as urls from "../../src/lib/url/urlTools";
+import {makeGetRequest} from "../../src/actions/apiActions";
 
 
+const mockStore = configureMockStore();
 
 describe('Pure action creators', () => {
-    it('should make a correct url with params', () => {
-        const expectedUrl = 'https://moo.com/cow?color=brown&gender=male';
-        const params = {
-            color: 'brown',
-            gender: 'male',
-        };
-        uri = 'https://moo.com/cow';
-        expect(makeUrl(uri, params)).toEqual(expectedUrl);
-    });
-
     it('should dispatch a fetch item', () => {
         const action = {
             type: actionTypes.fetchItem
@@ -42,5 +34,35 @@ describe('Pure action creators', () => {
         };
         expect(fetchItemSuccess()).toEqual(action);
     });
+});
+
+describe('Request making', () => {
+    beforeEach(() => {
+        urls.makeUrl = jest.fn(() => {
+            return 'wow what a url';
+        });
+        urls.formatHeader = jest.fn(() => {
+            return {};
+        });
+    });
+
+    it('makes a get request', () => {
+        const expectedResponse = JSON.stringify({token: 'hellothisisatoken'});
+        fetch.mockResponseOnce(expectedResponse);
+        const dataCallback = jest.fn(() => {
+            return {
+                type: 'filler'
+            }
+        });
+        const successCallback = jest.fn(() => {
+            return {
+                type: 'filler'
+            }
+        });
+        const store = mockStore({});
+        store.dispatch(makeGetRequest('wow what a', dataCallback, [successCallback]));
+        expect(dataCallback).toBeCalledWith(JSON.parse(expectedResponse));
+    });
+
 });
 
