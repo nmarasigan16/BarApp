@@ -9,13 +9,9 @@ This describes the endpoints and requirements for each endpoint.  |WIP| indicate
 + Register
 
   + [POST] /register
-  + Registering a Bar requires the following in json format:
-
-    + {'username': string, 'password': string, 'name': string, 'location': string, 'phone': string, 'bar': boolean}
-
   + Registering a User requires the following in json format:
 
-    + {'username': string, 'password': string, 'name': string, 'age': integer, 'gender': string, 'bar': boolean}
+    + {'username': string, 'password': string, 'name': string, 'age': integer, 'gender': string}
 
 + Login
 
