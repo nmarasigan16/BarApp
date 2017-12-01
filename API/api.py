@@ -235,4 +235,4 @@ def fblogin():
             'message': 'Try again'
             }
             return make_response(jsonify(responseObject)), 500
-# app.run(debug=True)
+app.run(debug=True)

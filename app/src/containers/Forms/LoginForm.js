@@ -4,6 +4,9 @@ import {
     Dimensions,
     TouchableOpacity,
 } from 'react-native'
+import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
+import authActions from '../../actions/authActions';
 import { colorScheme } from "../../lib/styles/ColorScheme";
 import ValidatedTextInput from "../../components/general/ValidatedTextInput/ValidatedTextInput";
 import { validators } from "../../lib/validators";
@@ -25,7 +28,7 @@ class LoginForm extends Component {
     onLogin() {
         const data = this.form.getData();
         if(data.valid){
-            this.props.nav.navigate('Home');
+            this.props.authActions.getToken(data.username.value, data.password.value);
         }
     }
 
@@ -68,4 +71,14 @@ class LoginForm extends Component {
     }
 }
 
-export default LoginForm;
+function mapDispatchToProps(dispatch) {
+    return {
+        authActions: bindActionCreators(authActions, dispatch)
+    };
+}
+
+function mapStateToProps(state) {
+    return {};
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(LoginForm);

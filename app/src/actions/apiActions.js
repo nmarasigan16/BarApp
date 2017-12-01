@@ -1,8 +1,7 @@
 import {apiActionTypes as actionTypes} from './actionTypes';
 import {formatHeaders, makeUrl} from "../lib/url/urlTools";
 
-export const API_ROOT = '';
-export const FACEBOOK_API_ROOT = '';
+export const API_ROOT = 'http://127.0.0.1:5000';
 
 //Helper functions
 
@@ -57,6 +56,7 @@ export const makePostRequest = (uri, dataCallback, successCallback=[], params={}
         'Accept': 'application/json'
     };
     dispatch(fetchItem());
+    console.log(`making post request to ${uriWithParams} with body ${body}`);
     return fetch(uriWithParams,
         {
             method: 'POST',
@@ -65,6 +65,7 @@ export const makePostRequest = (uri, dataCallback, successCallback=[], params={}
         })
         .then(
             response => {
+                console.log(response);
                 response.json().then(
                 json => {
                     dispatch(fetchItemSuccess());
