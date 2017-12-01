@@ -25,6 +25,20 @@ bcrypt = Bcrypt(app)
 mongo = PyMongo(app)
 db_ops = DBOperations(mongo)
 
+def get_authorization(auth_header):
+    if auth_header:
+        auth_token = auth_header
+    else:
+        auth_token = ''
+    return (auth_token, auth_token and not db_ops.check_if_blacklisted(auth_token))
+
+def create_response(status, message, status_number):
+    responseObject = {
+            'status': status,
+            'message': message
+    }
+    return make_response(jsonify(responseObject)), status_number
+
 @app.route('/register', methods=['POST'])
 def register():
     """
@@ -35,7 +49,7 @@ def register():
     user = db_ops.check_user_db(content['username'])
     if user is None:
         try:
-            user = User(content['username'], content['password'], content['name'], 'user'
+            user = User(content['username'], content['password'], content['name'], 'user',
                 content['age'], content['gender'], bcrypt)
             auth_token = user.encode_auth_token(user.username)
             responseObject = {
@@ -44,20 +58,11 @@ def register():
                 'auth_token': auth_token.decode()
             }
             db_ops.add_user_to_db(user)
-            return make_response(jsonify(responseObject)), 201
+            return make_response(jsonify(responseObject)), 200
         except Exception as e:
-            responseObject = {
-                'status': 'fail',
-                'message': 'Some error occurred. Please try again.'
-            }
-            traceback.print_exc(file=sys.stdout)
-            return make_response(jsonify(responseObject)), 401
+            return create_response('fail', 'Some error occurred.', 401)
     else:
-        responseObject = {
-            'status': 'fail',
-            'message': 'User already exists. Please Log in.',
-        }
-        return make_response(jsonify(responseObject)), 202
+        return create_response('fail', 'User already exists. Please Log in.', 401)
 
 @app.route('/login', methods=['POST'])
 def login():
@@ -79,17 +84,9 @@ def login():
                 }
                 return make_response(jsonify(responseObject)), 200
         else:
-            responseObject = {
-                'status': 'fail',
-                'message': 'User does not exist.'
-            }
-            return make_response(jsonify(responseObject)), 404
+            return create_response('fail', 'User does not exist', 401)
     except Exception as e:
-        responseObject = {
-            'status': 'fail',
-            'message': 'Try again'
-        }
-        return make_response(jsonify(responseObject)), 500
+        return create_response('fail', 'Try again.', 401)
 
 @app.route('/logout', methods=['POST'])
 def logout():
@@ -98,13 +95,10 @@ def logout():
     :return: String and status
     """
     auth_header = request.headers.get('Authorization')
-    if auth_header:
-        auth_token = auth_header
-    else:
-        auth_token = ''
-    if auth_token and not db_ops.check_if_blacklisted(auth_token):
+    auth_token, valid = get_authorization(auth_header)
+    if valid:
         resp = User.decode_auth_token(auth_token)
-        if isinstance(resp, str):
+        if resp[1]:
             try:
                 responseObject = {
                     'status': 'success',
@@ -119,17 +113,9 @@ def logout():
                 }
                 return make_response(jsonify(responseObject)), 200
         else:
-            responseObject = {
-                'status': 'fail',
-                'message': resp
-            }
-            return make_response(jsonify(responseObject)), 401
+            return create_response('fail',resp[0], 401)
     else:
-        responseObject = {
-            'status': 'fail',
-            'message': 'Provide a valid auth token.'
-        }
-        return make_response(jsonify(responseObject)), 403
+        return create_response('fail', 'Invalid Token', 401)
 
 @app.route('/status', methods=['GET'])
 def status():
@@ -138,14 +124,11 @@ def status():
     :return: User object as a dictionary
     """
     auth_header = request.headers.get('Authorization')
-    if auth_header:
-        auth_token = auth_header
-    else:
-        auth_token = ''
-    if auth_token and not db_ops.check_if_blacklisted(auth_token):
+    auth_token, valid = get_authorization(auth_header)
+    if valid:
         resp = User.decode_auth_token(auth_token)
-        if isinstance(resp, str):
-            user = db_ops.check_user_db(resp)
+        if resp[1]:
+            user = db_ops.check_user_db(resp[0])
             try:
                 if user:
                     responseObject = {
@@ -155,29 +138,13 @@ def status():
                     }
                     return make_response(jsonify(responseObject)), 200
                 else:
-                    responseObject = {
-                    'status': 'fail',
-                    'message': 'User does not exist'
-                    }
-                    return make_response(jsonify(responseObject)), 401
+                    return create_response('fail', 'User does not exist.', 401)
             except Exception as e:
-                responseObject = {
-                    'status': 'fail',
-                    'message': e
-                }
-                return make_response(jsonify(responseObject)), 401
+                return create_response('fail', e, 401)
         else:
-            responseObject = {
-                'status': 'fail',
-                'message': resp
-            }
-            return make_response(jsonify(responseObject)), 401
+            return create_response('fail', resp[0], 401)
     else:
-        responseObject = {
-            'status': 'fail',
-            'message': 'Provide a valid auth token.'
-        }
-        return make_response(jsonify(responseObject)), 403
+        return create_response('fail', 'Provide Valid Auth Token', 401)
 
 @app.route('/fblogin', methods=['POST'])
 def fblogin():
@@ -201,11 +168,7 @@ def fblogin():
             }
             return make_response(jsonify(responseObject)), 200
         else:
-            responseObject = {
-            'status': 'fail',
-            'message': 'Try again'
-            }
-            return make_response(jsonify(responseObject)), 500
+            return create_response('fail', 'Try Again', 401)
     else:
         user = User(resp['email'], None, resp['first_name'], resp['age'], resp['gender'], bc)
         auth_token = user.encode_auth_token(user.username)
@@ -218,11 +181,86 @@ def fblogin():
             db_ops.add_user_to_db(user)
             return make_response(jsonify(responseObject)), 200
         else:
-            responseObject = {
-            'status': 'fail',
-            'message': 'Try again'
-            }
-            return make_response(jsonify(responseObject)), 500
+            return create_response('fail', 'Try Again', 401)
 
+@app.route('/createbar', methods=['POST'])
+def create_bar():
+    auth_header = request.headers.get('Authorization')
+    auth_token, valid = get_authorization(auth_header)
+    if valid:
+        resp, success = User.decode_auth_token(auth_token)
+        user = db_ops.check_user_db(resp)
+        if success:
+            if user['status'] == 'admin':
+                content = request.get_json()
+                bar = Bar(content['username'], content['password'], content['name'],
+                            content['location'], content['phone'])
+                responseObject = {
+                    'status': 'success',
+                    'message': 'Successfully added bar.'
+                }
+                db_ops.add_bar_to_db(bar)
+                return make_response(jsonify(responseObject)), 200
+            else:
+                return create_response('fail', 'Incorrect Priveleges', 401)
+        else:
+            return create_response('fail', resp, 401)
+    else:
+        return create_response('fail', 'Invalid Token', 401)
 
+def update_status(new_status, auth_token, bartender = False):
+    resp, success = User.decode_auth_token(auth_token)
+    user = db_ops.check_user_db(resp)
+    content= request.get_json()
+    if success:
+        username = content['username']
+        bar_id = content['bar_id']
+        user_to_change = db_ops.check_user_db(username)
+        if bartender:
+            if bar_id not in user[bars]:
+                return create_response('fail', 'Incorrect Priveleges', 401)
+        elif user['status'] != 'admin':
+            return create_response('fail', 'Incorrect Priveleges', 401)
+        if user_to_change:
+            try:
+                responseObject = {
+                'status': 'success',
+                'message': 'Successfully added user.'
+                }
+                db_ops.update_user('bars', user_to_change['bars'].append((new_status, bar_id)), username)
+                return make_response(jsonify(responseObject)), 200
+            except Exception as e:
+                return create_response('fail', 'Something went wrong', 401)
+    else:
+        return create_response('fail', 'resp', 401)
+
+@app.route('/manager', methods = ['PUT'])
+def manager():
+    auth_header = request.headers.get('Authorization')
+    auth_token, valid = get_authorization(auth_header)
+    if valid:
+        return update_status('manager', auth_token)
+    else:
+        return create_response('fail', 'Invalid Token', 401)
+
+@app.route('/bartender', methods = ['PUT'])
+def bartender():
+    auth_header = request.headers.get('Authorization')
+    auth_token, valid = get_authorization(auth_header)
+    if valid:
+        return update_status('bartender', auth_token, bartender = True)
+    else:
+        return create_response('fail', 'Invalid Token', 401)
+
+@app.route('/bar/{bar_id}', methods = ['GET'])
+def get_bar(bar_id):
+    return "NOTHING"
+
+@app.route('/specials', methods = ['GET'])
+def get_specials():
+    return "NOTHING"
+
+@app.route('/updatespecials', methods = ['PUT'])
+def update_specials():
+    return "NOTHING"
 # app.run(debug=True)
