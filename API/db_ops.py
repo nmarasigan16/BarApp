@@ -44,13 +44,9 @@ class DBOperations:
         else:
             return True
 
-    def check_bar_user_db(self, username):
+    def check_user_db(self, username):
         user = self.mongo.db.Users.find_one({'username': username})
         if user:
-            user['isbar'] = False
             return user
-        user = self.mongo.db.Bars.find_one({'username': username})
-        if user:
-            user['isbar'] = True
-            return user
-        return None
+        else:
+            return None

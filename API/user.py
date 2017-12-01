@@ -6,7 +6,8 @@ BCRYPT_LOG_ROUNDS = 13
 SECRET_KEY = "supersecret"
 
 class User:
-    def __init__(self, username, password, name, age, gender, bc, specials = None):
+    def __init__(self, username, password, name, status age,
+        gender, bc, specials = None):
         """
         Initializes the user object
         """

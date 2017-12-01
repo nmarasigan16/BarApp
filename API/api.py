@@ -32,25 +32,18 @@ def register():
     :return: String and status
     """
     content = request.get_json()
-    user = db_ops.check_bar_user_db(content['username'])
+    user = db_ops.check_user_db(content['username'])
     if user is None:
         try:
-            if content['bar']:
-                user = Bar(content['username'], content['password'], content['name'],
-                    content['location'], content['phone'], bcrypt)
-            else:
-                user = User(content['username'], content['password'], content['name'],
-                    content['age'], content['gender'], bcrypt)
+            user = User(content['username'], content['password'], content['name'], 'user'
+                content['age'], content['gender'], bcrypt)
             auth_token = user.encode_auth_token(user.username)
             responseObject = {
                 'status': 'success',
                 'message': 'Successfully registered.',
                 'auth_token': auth_token.decode()
             }
-            if content['bar']:
-                db_ops.add_bar_to_db(user)
-            else:
-                db_ops.add_user_to_db(user)
+            db_ops.add_user_to_db(user)
             return make_response(jsonify(responseObject)), 201
         except Exception as e:
             responseObject = {
@@ -74,7 +67,7 @@ def login():
     """
     content = request.get_json()
     try:
-        user = db_ops.check_bar_user_db(content['username'])
+        user = db_ops.check_user_db(content['username'])
         if user and bcrypt.check_password_hash(
             user['password'], content['password']):
             auth_token = User.encode_auth_token(user['username'])
@@ -152,16 +145,9 @@ def status():
     if auth_token and not db_ops.check_if_blacklisted(auth_token):
         resp = User.decode_auth_token(auth_token)
         if isinstance(resp, str):
-            user = db_ops.check_bar_user_db(resp)
+            user = db_ops.check_user_db(resp)
             try:
-                if not user['isbar']:
-                    responseObject = {
-                        'status': 'success',
-                        'username': user['username'],
-                        'bar': False
-                    }
-                    return make_response(jsonify(responseObject)), 200
-                elif user['isbar']:
+                if user:
                     responseObject = {
                         'status': 'success',
                         'username': user['username'],
@@ -204,7 +190,7 @@ def fblogin():
     payload = {'access_token':token}
     resp = requests.get(user_url, params = payload)
     resp = resp.get_json()
-    user = db_ops.check_bar_user_db(resp['email'])
+    user = db_ops.check_user_db(resp['email'])
     if user:
         auth_token = User.encode_auth_token(user['username'])
         if auth_token:
@@ -237,4 +223,6 @@ def fblogin():
             'message': 'Try again'
             }
             return make_response(jsonify(responseObject)), 500
+
+
 # app.run(debug=True)
