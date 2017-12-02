@@ -3,11 +3,11 @@ import datetime
 import jwt
 
 class Bar:
-    def __init__(self, id, name, location, phone, cover, specials = {}):
+    def __init__(self, id, name, location, phone, cover, specials = []):
         """
         Initializes the user object
         """
-        self.username = username
+        self.bar_id = id
         self.name = name
         self.location = location
         self.cover = cover
