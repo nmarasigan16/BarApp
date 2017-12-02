@@ -1,5 +1,6 @@
 import datetime
 from flask_pymongo import PyMongo
+from bson.objectid import ObjectId
 
 class DBOperations:
     def __init__(self, db):
@@ -13,9 +14,11 @@ class DBOperations:
         Adds a user to the database
         :return: Nothing
         """
-        obj = {'username': user.username, 'password':user.password, 'name':user.name,
-            'age': user.age, 'gender': user.gender, 'specials':user.specials}
+        obj = {'username': user.username, 'password':user.password, 'name':user.name, 'status':user.status,
+            'age': user.age, 'gender': user.gender, 'bars':user.bars}
+        print("HERE")
         self.mongo.db.Users.insert_one(obj)
+
     def add_bar_to_db(self, bar):
         """
         Adds a bar to the database
@@ -44,13 +47,17 @@ class DBOperations:
         else:
             return True
 
-    def check_bar_user_db(self, username):
+    def check_user_db(self, username):
         user = self.mongo.db.Users.find_one({'username': username})
         if user:
-            user['isbar'] = False
             return user
-        user = self.mongo.db.Bars.find_one({'username': username})
-        if user:
-            user['isbar'] = True
-            return user
-        return None
+        else:
+            return None
+
+    def update_user(self, member, value, username):
+        update = mongo.Users.udpate_one({'username': username}, {'$set': {member: value}})
+        if update.acknowledged:
+            return
+        else:
+            raise Exception('Failed to update')
+
