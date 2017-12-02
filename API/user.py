@@ -6,7 +6,8 @@ BCRYPT_LOG_ROUNDS = 13
 SECRET_KEY = "supersecret"
 
 class User:
-    def __init__(self, username, password, name, age, gender, bc, specials = None):
+    def __init__(self, username, password, name, status, age,
+        gender, bc, bars = []):
         """
         Initializes the user object
         """
@@ -14,9 +15,10 @@ class User:
         self.password = bc.generate_password_hash(
             password, BCRYPT_LOG_ROUNDS).decode('utf-8')
         self.name = name
+        self.status = status
         self.age = age
         self.gender = gender
-        self.specials = specials
+        self.bars = bars
 
     @staticmethod
     def encode_auth_token(user_id):
@@ -46,13 +48,9 @@ class User:
         """
         try:
             payload = jwt.decode(auth_token, SECRET_KEY, algorithms=['HS256'])
-            return payload['sub']
+            return (payload['sub'], True)
         except jwt.ExpiredSignatureError:
-            return 'Signature expired. Please log in again.'
+            return ('Signature expired. Please log in again.', False)
         except jwt.InvalidTokenError:
-            return 'Invalid token. Please log in again.'
-
-
-
-
+            return ('Invalid token. Please log in again.', False)
 
