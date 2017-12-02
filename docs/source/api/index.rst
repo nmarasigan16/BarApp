@@ -57,7 +57,7 @@ This describes the endpoints and requirements for each endpoint.  |WIP| indicate
 
   + [GET] /user
   + 'Authorization' header to be included with access token
-  + Upon success returns in json {'status' : string, 'message' : string, 'username':string, 'name': string, 'age':integer, 'gender':string}, 200
+  + Upon success returns in json {'status' : string, 'message' : string,'user':{ 'username':string, 'name': string, 'age':integer, 'gender':string} }, 200
 
 + Bar |wip|
 
