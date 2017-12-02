@@ -12,7 +12,7 @@ This describes the endpoints and requirements for each endpoint.  |WIP| indicate
   + Registering a User requires the following in json format:
 
     + {'username': string, 'password': string, 'name': string, 'age': integer, 'gender': string}
-    + Upon success returns in json {'status' : string, 'message' : string, 'username':string, 'name': string, 'age':integer, 'gender':string}, 200
+    + Upon success returns in json {'status' : string, 'message' : string,'user':{ 'username':string, 'name': string, 'age':integer, 'gender':string} }, 200
     + Upon failure returns in json {'status' : string, 'message' : string}, 401
 
 + Login
@@ -21,7 +21,7 @@ This describes the endpoints and requirements for each endpoint.  |WIP| indicate
   + Logging in for both bar and the user requries the following in json format:
 
     + {'username': string, 'password': string, 'bar' : boolean}
-    + Upon success returns in json {'status' : string, 'message' : string, 'username':string, 'name': string, 'age':integer, 'gender':string}, 200
+    + Upon success returns in json {'status' : string, 'message' : string,'user':{ 'username':string, 'name': string, 'age':integer, 'gender':string} }, 200
     + Upon failure returns in json {'status' : string, 'message' : string}, 401
 
 + Logout
