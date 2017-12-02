@@ -22,7 +22,6 @@ class RegistrationForm extends Component {
 
     getData() {
         const data = this.form.getData();
-        console.log(data);
     }
 
     returnToLogin() {
@@ -48,12 +47,13 @@ class RegistrationForm extends Component {
                     ref={(form) => {this.form = form}}>
                     <TextInput
                         label={'Email'}
-                        name={'email'}
+                        name={'username'}
                         validators={[validators.email, validators.isRequired]}
                         autoCapitalize={'none'}
                         />
                     <Dropdown
                         label={'Gender'}
+                        name={'gender'}
                         data={genders}
                         validators={[validators.isRequired]}
                     />

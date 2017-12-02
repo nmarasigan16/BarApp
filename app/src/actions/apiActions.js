@@ -3,7 +3,30 @@ import {formatHeaders, makeUrl} from "../lib/url/urlTools";
 
 export const API_ROOT = 'http://127.0.0.1:5000';
 
-//Helper functions
+//Helper function
+function processResponse(response, dataCallback, successCallback=[]) {
+    return dispatch => {
+        if(response.ok) {
+            response.json().then(
+                json => {
+                    dispatch(fetchItemSuccess());
+                    dispatch(dataCallback(json));
+                    if (successCallback[0] != null) {
+                        successCallback.forEach((callback) => {
+                            dispatch(callback());
+                        });
+                    }
+                }
+            )
+        } else {
+            response.json().then(
+                json => {
+                    dispatch(fetchItemError(json.message));
+                }
+            )
+        }
+    }
+}
 
 export const fetchItem = () => ({
         type: actionTypes.fetchItem,
@@ -27,18 +50,7 @@ export const makeGetRequest = (uri, dataCallback, successCallback=[], params={})
             headers: formatHeaders(authState)
         })
         .then(
-            response => {
-                response.json().then(
-                json => {
-                    dispatch(fetchItemSuccess());
-                    dispatch(dataCallback(json));
-                    if(successCallback[0] != null) {
-                        successCallback.forEach((callback) => {
-                            dispatch(callback());
-                        });
-                    }
-                })
-            }
+            response => {dispatch(processResponse(response, dataCallback, successCallback));}
         )
         .catch(
             error => {
@@ -64,19 +76,7 @@ export const makePostRequest = (uri, dataCallback, successCallback=[], params={}
             body,
         })
         .then(
-            response => {
-                console.log(response);
-                response.json().then(
-                json => {
-                    dispatch(fetchItemSuccess());
-                    dispatch(dataCallback(json));
-                    if(successCallback[0] != null) {
-                        successCallback.forEach((callback) => {
-                            dispatch(callback());
-                        });
-                    }
-                })
-            }
+            response => {dispatch(processResponse(response, dataCallback, successCallback));}
         )
         .catch(
             error => dispatch(fetchItemError(error))
@@ -98,15 +98,7 @@ export const makePutRequest = (uri, dataCallback, successCallback=[], params={},
             body
         })
         .then(
-            response => {
-                dispatch(fetchItemSuccess());
-                dispatch(dataCallback(response));
-                if(successCallback[0] != null) {
-                    successCallback.forEach((callback) => {
-                        dispatch(callback());
-                    });
-                }
-            }
+            response => {dispatch(processResponse(response, dataCallback, successCallback));}
         )
         .catch(
             error => dispatch(fetchItemError(error))
@@ -126,15 +118,7 @@ export const makeDeleteRequest = (uri, dataCallback, successCallback=[], params=
             headers: formatHeaders(authState, putHeaders)
         })
         .then(
-            response => {
-                dispatch(fetchItemSuccess());
-                dispatch(dataCallback(response));
-                if(successCallback[0] != null) {
-                    successCallback.forEach((callback) => {
-                        dispatch(callback());
-                    });
-                }
-            }
+            response => {dispatch(processResponse(response, dataCallback, successCallback));}
         )
         .catch(
             error => dispatch(fetchItemError(error))

@@ -28,7 +28,7 @@ class LoginForm extends Component {
     onLogin() {
         const data = this.form.getData();
         if(data.valid){
-            this.props.authActions.getToken(data.username.value, data.password.value);
+            this.props.authActions.login(data.username.value, data.password.value);
         }
     }
 
@@ -41,7 +41,7 @@ class LoginForm extends Component {
                     <ValidatedTextInput
                         name={'username'}
                         color={colorScheme.accent}
-                        label={'Username'}
+                        label={'Email'}
                         labelColor={colorScheme.accent}
                         autoCapitalize = {'none'}
                         validators={[validators.email]}

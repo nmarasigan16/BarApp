@@ -16,6 +16,16 @@ function authReducer(state = initialState, action){
                 authUser: action.username
             });
         }
+        case actionTypes.checkToken: {
+            return Object.assign({}, state, {
+                token: action.token
+            });
+        }
+        case actionTypes.setToken: {
+            return Object.assign({}, state, {
+                token: action.token
+            });
+        }
         default: {
             return state;
         }

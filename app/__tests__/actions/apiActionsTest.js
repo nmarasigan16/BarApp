@@ -115,7 +115,7 @@ describe('Request making', () => {
 
         it('makes a put request without a success callback', () => {
             const expectedResponse = JSON.stringify({token: 'hellothisisatoken'});
-            fetch.mockResponseOnce(expectedResponse);
+            fetch.mockResponseOnce([expectedResponse, {status: 400}]);
             store.dispatch(actions.makePutRequest('hellourl', dataCallback)).then(
                 () => {
                     expect(store.getActions).toEqual(expectedActionsSuccessCallback);
@@ -152,7 +152,7 @@ describe('Request making', () => {
                 }
             );
         })
-    })
+    });
 
     describe('failure', () => {
         const expectedActions = [
@@ -173,6 +173,7 @@ describe('Request making', () => {
                 }
             );
         });
+
         it('makes a post request', () => {
             const error = JSON.stringify({error: 'error'});
             fetch.mockRejectOnce(error);
@@ -197,6 +198,19 @@ describe('Request making', () => {
             const error = JSON.stringify({error: 'error'});
             fetch.mockRejectOnce(error);
             store.dispatch(actions.makeDeleteRequest('hellourl')).then(
+                () => {
+                    expect(store.getActions).toEqual(expectedActions);
+                }
+            );
+        });
+
+        it('makes a failure request', () => {
+            global.fetch = jest.fn(() => {
+                const error = JSON.stringify({message: 'error'});
+                const response = new Response(error, {status: 401, statusText: 'unauthorized'});
+                return Promise.resolve(response);
+            });
+            store.dispatch(actions.makeGetRequest('hellourl')).then(
                 () => {
                     expect(store.getActions).toEqual(expectedActions);
                 }

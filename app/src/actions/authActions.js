@@ -10,25 +10,32 @@ export const authenticate = (response) => {
     };
 };
 
-export const extractUsername = (response) => {
-    let login = '';
-    if('login' in response){
-       login = response.login
-    }
-    return {
-        type: actionTypes.setAuthUser,
-        username: login
-    };
+export const processAuthResponse = (response) => (dispatch) => {
+    return dispatch(setToken(response.token));
 };
 
-export const getToken = (username, password) => (dispatch, getState) => {
-    console.log('getting token');
+export const setToken = (response) => {
+
+};
+
+export const login = (username, password) => (dispatch, getState) => {
     uri = `${API_ROOT}/login`;
     const body = {
         username,
         password
     };
     dispatch(makePostRequest(uri, authenticate, undefined, undefined, body))
+};
+
+export const register = (username, password, gender, age) => {
+    uri = `${API_ROOT}/register`;
+    const body = {
+        username,
+        password,
+        gender,
+        age
+    };
+    dispatch(makePostRequest(uri, set))
 };
 
 export default authActions = {

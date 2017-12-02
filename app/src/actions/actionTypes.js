@@ -19,7 +19,9 @@ export const apiActionTypes = {
 
 export const authActionTypes = {
     authenticate: 'AUTHENTICATE',
-    setAuthUser: 'SET_AUTH_USER'
+    setAuthUser: 'SET_AUTH_USER',
+    checkToken: 'CHECK_TOKEN',
+    setToken: 'SET_TOKEN',
 };
 
 export const searchActionTypes = {

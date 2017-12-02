@@ -1,6 +1,7 @@
 import { AsyncStorage } from 'react-native';
 
 const keys = {
+    TOKEN: 'token',
     REPO_KEY: 'repositories',
     FOLLOWER_KEY: 'followers',
     FOLLOWING_KEY: 'following',
