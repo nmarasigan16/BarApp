@@ -1,6 +1,7 @@
 import { AsyncStorage } from 'react-native';
 
-const keys = {
+export const keys = {
+    TOKEN: 'token',
     REPO_KEY: 'repositories',
     FOLLOWER_KEY: 'followers',
     FOLLOWING_KEY: 'following',
@@ -9,12 +10,18 @@ const keys = {
 
 export function storeItem(key, value){
     if(typeof value != null)
-        AsyncStorage.setItem(keys[key], JSON.stringify(value));
+        AsyncStorage.setItem(key, JSON.stringify(value));
 }
 
-export function getItem(key, value){
-    AsyncStorage.getItem(keys[key]).then(
-        retVal => {
-            return JSON.parse(retVal);
-        });
+export function getItem(key){
+    AsyncStorage.getItem(key)
+        .then(
+            retVal => {
+                return JSON.parse(retVal);
+            })
+        .catch(
+            () => {
+                return '';
+            }
+        )
 }

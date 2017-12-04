@@ -2,7 +2,7 @@ import { apiActionTypes as actionTypes } from '../actions/actionTypes';
 
 const initialState = {
     isFetching: false,
-    error: false
+    error: ''
 };
 
 function apiReducer(state = initialState, action){
@@ -15,7 +15,7 @@ function apiReducer(state = initialState, action){
         case actionTypes.fetchItemFailure: {
             return Object.assign({}, state, {
                 isFetching: false,
-                error: true,
+                error: action.error,
             });
         }
         case actionTypes.fetchItemSuccess: {

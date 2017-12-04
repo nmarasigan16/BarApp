@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import Page from '../../components/LargeHeaderPage/PageComponent';
+import BarProfileLayout from '../../components/BarProfile/BarProfileLayout';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import { colorScheme } from "../../lib/styles/ColorScheme";
 
@@ -31,6 +32,7 @@ class BarProfileContainer extends Component {
                 }}
                 telephone={'2173557674'}
                 >
+                <BarProfileLayout/>
             </Page>
         )
     }

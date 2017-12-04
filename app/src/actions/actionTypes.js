@@ -14,12 +14,15 @@ export const profileActionTypes = {
 export const apiActionTypes = {
     fetchItem: 'FETCH_ITEM',
     fetchItemSuccess: 'FETCH_ITEM_SUCCESS',
-    fetchItemFailure: 'FETCH_ITEM_FAILURE'
+    fetchItemFailure: 'FETCH_ITEM_FAILURE',
+    resetError: 'RESET_ERROR',
 };
 
 export const authActionTypes = {
     authenticate: 'AUTHENTICATE',
-    setAuthUser: 'SET_AUTH_USER'
+    setAuthUser: 'SET_AUTH_USER',
+    checkToken: 'CHECK_TOKEN',
+    setToken: 'SET_TOKEN',
 };
 
 export const searchActionTypes = {

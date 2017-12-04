@@ -1,7 +1,7 @@
 import {
     Linking
 } from 'react-native';
-import { makeUrl } from "../actions/apiActions";
+import { makeUrl } from "./url/urlTools";
 
 const BASE_URL = 'ProfileApp://profile';
 const CLIENT_ID = '96b9e610674e11455074';

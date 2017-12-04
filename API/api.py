@@ -310,4 +310,4 @@ def get_specials():
 def update_specials():
     return "NOTHING"
 
-# app.run(debug=True)
+app.run(debug=True)

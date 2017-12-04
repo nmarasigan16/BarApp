@@ -12,8 +12,8 @@ class ValidatedDropdown extends Component {
 
         this.state = {
             name: props.name,
-            value: props.value || '',
-            initialValue : props.value || '',
+            value: props.value || {value: ''},
+            initialValue : props.value || {value: ''},
             validators: props.validators || [],
             errorMessage: '',
             valid: false,
@@ -56,7 +56,6 @@ class ValidatedDropdown extends Component {
         this.setState({
             value: this.dropdown.selectedItem()
         });
-        console.log(this.state.value);
         this.validate();
     }
 
