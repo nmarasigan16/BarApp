@@ -41,7 +41,8 @@ const SpecialRowComponent = ({special}) => {
                     <TouchableOpacity>
                         <Text
                             style={{
-                                color: colorScheme.secondaryAccent
+                                color: colorScheme.secondaryAccent,
+                                fontStyle: 'italic',
                             }}>
                             View {special.object.name}
                         </Text>

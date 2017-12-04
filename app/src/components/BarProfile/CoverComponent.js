@@ -23,7 +23,7 @@ class CoverComponent extends Component {
 
     handleCoverReport(e) {
         prompt(
-            'Report Cover',
+            'Report Incorrect Cover',
             'Please enter how much cover is here',
             [
                 {text: 'Cancel', onPress: this.cancelPrompt, style: 'cancel'},
