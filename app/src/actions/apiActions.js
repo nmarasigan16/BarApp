@@ -6,7 +6,6 @@ export const API_ROOT = 'http://127.0.0.1:5000';
 //Helper function
 function processResponse(response, dataCallback, successCallback=[]) {
     return dispatch => {
-        console.log(response);
         if(response.ok) {
             response.json().then(
                 json => {
@@ -25,9 +24,8 @@ function processResponse(response, dataCallback, successCallback=[]) {
                     json => {
                         dispatch(fetchItemError(json.message));
                     }
-                ).catch(
-                    () => {dispatch(fetchItemError('non-JSON error received'))}
                 )
+            //TODO add handling of non json errors
         }
     }
 }

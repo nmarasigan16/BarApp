@@ -35,7 +35,7 @@ const BarProfileLayout = ({bar}) => {
                     justifyContent: 'center',
                 }}>
                 <CoverComponent cover={10}/>
-                <RatioComponent guys={50} girls={50}/>
+                <RatioComponent guys={50}/>
             </View>
             <View
                 style={{
