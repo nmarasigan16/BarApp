@@ -2,6 +2,7 @@ import { authActionTypes as actionTypes } from "../actions/actionTypes";
 
 const initialState = {
     token: '',
+    registered: false,
 };
 
 function authReducer(state = initialState, action){
@@ -14,6 +15,11 @@ function authReducer(state = initialState, action){
         case actionTypes.setAuthUser: {
             return Object.assign({}, state, {
                 authUser: action.username
+            });
+        }
+        case actionTypes.registered: {
+            return Object.assign({}, state, {
+                registered: true
             });
         }
         case actionTypes.checkToken: {

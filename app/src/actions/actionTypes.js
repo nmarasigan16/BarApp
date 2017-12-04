@@ -23,6 +23,7 @@ export const authActionTypes = {
     setAuthUser: 'SET_AUTH_USER',
     checkToken: 'CHECK_TOKEN',
     setToken: 'SET_TOKEN',
+    registered: 'REGISTERED',
 };
 
 export const searchActionTypes = {
