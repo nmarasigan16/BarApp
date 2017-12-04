@@ -43,6 +43,12 @@ export const login = (username, password) => (dispatch) => {
     dispatch(makePostRequest(uri, processAuthResponse, undefined, undefined, body))
 };
 
+export const registered = () => {
+    return {
+        type: actionTypes.registered
+    }
+};
+
 export const register = (username, password, name, gender, age) => (dispatch) => {
     const uri = `${API_ROOT}/register`;
     const body = {
@@ -53,7 +59,7 @@ export const register = (username, password, name, gender, age) => (dispatch) =>
         age
     };
     console.log(JSON.stringify(body));
-    dispatch(makePostRequest(uri, processAuthResponse, undefined, undefined, body));
+    dispatch(makePostRequest(uri, registered, undefined, undefined, body));
 };
 
 export default authActions = {

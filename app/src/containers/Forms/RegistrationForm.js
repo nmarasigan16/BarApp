@@ -38,7 +38,7 @@ class RegistrationForm extends Component {
         if(newProps.error) {
             Toast.show(newProps.error);
         }
-        if(newProps.token) {
+        if(newProps.registered) {
             Toast.show('Registered successfully! Please log in');
             const back = NavigationActions.back();
             this.props.nav.dispatch(back);
@@ -133,7 +133,7 @@ function mapDispatchToProps(dispatch) {
 function mapStateToProps(state) {
     return {
         error: state.api.error,
-        token: state.auth.token
+        registered: state.auth.registered
     };
 }
 
