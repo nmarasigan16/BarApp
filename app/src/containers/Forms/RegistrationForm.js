@@ -5,13 +5,17 @@ import {
     Button,
     TouchableOpacity,
 } from 'react-native'
+import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
 import { NavigationActions } from 'react-navigation';
+import  authActions from '../../actions/authActions';
 import { colorScheme } from "../../lib/styles/ColorScheme";
 import Text from '../../components/general/text/TextComponent';
+import Toast from 'react-native-simple-toast';
 import Form from '../../components/general/ValidatedTextInput/ValidatedForm';
 import TextInput from '../../components/general/ValidatedTextInput/ValidatedTextInput';
 import Dropdown from '../../components/general/ValidatedTextInput/ValidatedDropdown';
-import { validators } from "../../lib/validators";
+import {isRequired, validators} from "../../lib/validators";
 
 class RegistrationForm extends Component {
     constructor(props) {
@@ -22,6 +26,23 @@ class RegistrationForm extends Component {
 
     getData() {
         const data = this.form.getData();
+        this.props.authActions.register(
+            data.username.value,
+            data.password.value,
+            data.name.value,
+            data.gender.value.value,
+            +data.age.value)
+    }
+
+    componentWillReceiveProps(newProps) {
+        if(newProps.error) {
+            Toast.show(newProps.error);
+        }
+        if(newProps.token) {
+            Toast.show('Registered successfully! Please log in');
+            const back = NavigationActions.back();
+            this.props.nav.dispatch(back);
+        }
     }
 
     returnToLogin() {
@@ -50,6 +71,12 @@ class RegistrationForm extends Component {
                         name={'username'}
                         validators={[validators.email, validators.isRequired]}
                         autoCapitalize={'none'}
+                        />
+                    <TextInput
+                        label={'Name'}
+                        name={'name'}
+                        validators={[validators.isRequired]}
+                        autoCapitalize={'words'}
                         />
                     <Dropdown
                         label={'Gender'}
@@ -97,4 +124,17 @@ class RegistrationForm extends Component {
     }
 }
 
-export default RegistrationForm;
+function mapDispatchToProps(dispatch) {
+    return {
+        authActions: bindActionCreators(authActions, dispatch),
+    };
+}
+
+function mapStateToProps(state) {
+    return {
+        error: state.api.error,
+        token: state.auth.token
+    };
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(RegistrationForm);

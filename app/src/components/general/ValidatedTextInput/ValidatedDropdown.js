@@ -56,7 +56,6 @@ class ValidatedDropdown extends Component {
         this.setState({
             value: this.dropdown.selectedItem()
         });
-        console.log(this.state.value);
         this.validate();
     }
 

@@ -5,6 +5,7 @@ import {
     Platform
 } from 'react-native';
 import Navigator from './StackNav';
+import DrawerNav from './DrawerNav';
 import { colorScheme } from "../styles/ColorScheme";
 
 

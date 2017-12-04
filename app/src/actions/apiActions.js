@@ -6,6 +6,7 @@ export const API_ROOT = 'http://127.0.0.1:5000';
 //Helper function
 function processResponse(response, dataCallback, successCallback=[]) {
     return dispatch => {
+        console.log(response);
         if(response.ok) {
             response.json().then(
                 json => {
@@ -19,11 +20,14 @@ function processResponse(response, dataCallback, successCallback=[]) {
                 }
             )
         } else {
-            response.json().then(
-                json => {
-                    dispatch(fetchItemError(json.message));
-                }
-            )
+            response.json()
+                .then(
+                    json => {
+                        dispatch(fetchItemError(json.message));
+                    }
+                ).catch(
+                    () => {dispatch(fetchItemError('non-JSON error received'))}
+                )
         }
     }
 }
@@ -34,7 +38,7 @@ export const fetchItem = () => ({
 
 export const fetchItemError = (error) => ({
         type: actionTypes.fetchItemFailure,
-        error: error
+        error,
 });
 
 export const fetchItemSuccess = () => ({
@@ -64,11 +68,11 @@ export const makePostRequest = (uri, dataCallback, successCallback=[], params={}
     const uriWithParams = makeUrl(uri, params);
     const authState = getState().auth;
     body = JSON.stringify(body);
-    let headers = {
+    const headers = {
+        'Content-Type': 'application/json',
         'Accept': 'application/json'
     };
     dispatch(fetchItem());
-    console.log(`making post request to ${uriWithParams} with body ${body}`);
     return fetch(uriWithParams,
         {
             method: 'POST',
