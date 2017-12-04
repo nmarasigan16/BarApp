@@ -20,6 +20,12 @@ class User:
         self.gender = gender
         self.bars = bars
 
+    def to_dict(self):
+        ret ={'username': self.username, 'name':self.name,
+            'status':self.status, 'age': self.age, 'gender': self.gender,
+            'bars':self.bars}
+        return ret
+
     @staticmethod
     def encode_auth_token(user_id):
         """

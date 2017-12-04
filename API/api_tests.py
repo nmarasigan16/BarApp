@@ -37,15 +37,16 @@ class ApiTest(unittest.TestCase):
         self.assertEqual(response.status_code, 200)
         return data['auth_token']
 
+
     def test_login_cycle(self):
-        data = {'username': 'test_person', 'password':"123456"}
+        data = {'username': 'test3@gmail.com', 'password':"123456"}
         auth_token = self.get_login(data)
         headers = [('Content-Type', 'application/json')]
         headers.append(('Authorization', auth_token))
         response = self.app.get('/status', headers=headers)
         data = json.loads(response.data.decode())
         self.assertTrue(data['status'] == 'success')
-        self.assertTrue(data['username'] == 'test_person')
+        self.assertTrue(data['username'] == 'test3@gmail.com')
         response = self.app.post('/logout', headers=headers)
         data = json.loads(response.data.decode())
         self.assertTrue(data['status'] == 'success')
@@ -67,7 +68,6 @@ class ApiTest(unittest.TestCase):
         self.assertTrue(data['message'] == 'Successfully added user.')
         self.assertEqual(response.status_code, 200)
 
-
     def test_add_bartender(self):
         data = {'username': 'test3@gmail.com', 'password':"123456"}
         auth_token = self.get_login(data)
@@ -79,24 +79,76 @@ class ApiTest(unittest.TestCase):
         headers.append(('Content-Length', json_data_length))
         response = self.app.put('/bartender', headers=headers, data=json_data)
         data = json.loads(response.data.decode())
-        print(data)
         self.assertTrue(data['status'] == 'success')
         self.assertTrue(data['message'] == 'Successfully added user.')
         self.assertEqual(response.status_code, 200)
 
-    # @patch('api.requests.get')
-    # def test_fb_login(self, mock_get):
-    #     first_resp = {'access_token': '190qrknefa109u4naskdf'}
-    #     second_resp = {'email':'testfb@gmail.com', 'first_name':'testing', 'age':21, 'gender':'M'}
-    #     responses = [json.dumps(first_resp), json.dumps(second_resp)]
-    #     mock_get.side_effect = responses
-    #     headers = [('Content-Type', 'application/json')]
-    #     data = {'code':'secret_code'}
-    #     json_data = json.dumps(data)
-    #     json_data_length = len(json_data)
-    #     headers.append(('Content-Length', json_data_length))
-    #     response = self.app.post('/fblogin', headers=headers, data=json_data)
-    #     print (response)
+    def test_get_bar(self):
+        data = {'username': 'aachhugani@gmail.com', 'password':"admin1"}
+        auth_token = self.get_login(data)
+        headers = [('Content-Type', 'application/json')]
+        headers.append(('Authorization', auth_token))
+        response = self.app.get('/bar/test_bar', headers=headers)
+        data = json.loads(response.data.decode())
+        self.assertTrue(data['status'] == 'success')
+        self.assertTrue(data['message'] == 'Found bar.')
+        self.assertEqual(response.status_code, 200)
+
+    def test_get_specials(self):
+        data = {'username': 'aachhugani@gmail.com', 'password':"admin1"}
+        auth_token = self.get_login(data)
+        headers = [('Content-Type', 'application/json')]
+        headers.append(('Authorization', auth_token))
+        response = self.app.get('/specials', headers=headers)
+        data = json.loads(response.data.decode())
+        self.assertTrue(data['status'] == 'success')
+        self.assertTrue(data['message'] == 'Successfully added user.')
+        self.assertEqual(response.status_code, 200)
+
+    def test_delete_specials(self):
+        data = {'username': 'aachhugani@gmail.com', 'password':"admin1"}
+        auth_token = self.get_login(data)
+        headers = [('Content-Type', 'application/json')]
+        headers.append(('Authorization', auth_token))
+        data = {'operation': 'delete', 'special_id': 1, 'bar_id':"test_bar"}
+        json_data = json.dumps(data)
+        json_data_length = len(json_data)
+        response = self.app.put('/specials/update', headers=headers, data = json_data)
+        data = json.loads(response.data.decode())
+        self.assertTrue(data['status'] == 'success')
+        self.assertTrue(data['message'] == 'Deleted special.')
+        self.assertEqual(response.status_code, 200)
+
+    def test_create_specials(self):
+        data = {'username': 'aachhugani@gmail.com', 'password':"admin1"}
+        auth_token = self.get_login(data)
+        headers = [('Content-Type', 'application/json')]
+        headers.append(('Authorization', auth_token))
+        data = {'operation': 'create', 'bar_id':"test_bar",
+            'special':{'bar_id':'test_bar', 'name': 'test',
+            'description':'hi there', 'object':None}}
+        json_data = json.dumps(data)
+        json_data_length = len(json_data)
+        response = self.app.put('/specials/update', headers=headers, data = json_data)
+        data = json.loads(response.data.decode())
+        self.assertTrue(data['status'] == 'success')
+        self.assertTrue(data['message'] == 'Created Special.')
+        self.assertEqual(response.status_code, 200)
+
+    def test_update_specials(self):
+        data = {'username': 'aachhugani@gmail.com', 'password':"admin1"}
+        auth_token = self.get_login(data)
+        headers = [('Content-Type', 'application/json')]
+        headers.append(('Authorization', auth_token))
+        data = {'operation': 'update', 'bar_id':"test_bar", 'special_id':1,
+                'update': ['name', 'HELLO']}
+        json_data = json.dumps(data)
+        json_data_length = len(json_data)
+        response = self.app.put('/specials/update', headers=headers, data = json_data)
+        data = json.loads(response.data.decode())
+        self.assertTrue(data['status'] == 'success')
+        self.assertTrue(data['message'] == 'Updated Special')
+        self.assertEqual(response.status_code, 200)
 
 if __name__ == "__main__":
     unittest.main()

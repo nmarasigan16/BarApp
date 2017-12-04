@@ -7,6 +7,7 @@ import requests
 
 from user import User
 from bar import Bar
+from special import Special
 from db_ops import DBOperations
 from flask import Flask, jsonify, request, make_response
 from flask_pymongo import PyMongo
@@ -55,7 +56,8 @@ def register():
             responseObject = {
                 'status': 'success',
                 'message': 'Successfully registered.',
-                'auth_token': auth_token.decode()
+                'auth_token': auth_token.decode(),
+                'user' : user.to_dict()
             }
             db_ops.add_user_to_db(user)
             return make_response(jsonify(responseObject)), 200
@@ -76,11 +78,17 @@ def login():
         if user and bcrypt.check_password_hash(
             user['password'], content['password']):
             auth_token = User.encode_auth_token(user['username'])
+
+            user = User(user['username'], user['password'], user['name'], user['status'],
+                user['age'], user['gender'], bcrypt)
+
             if auth_token:
                 responseObject = {
                     'status': 'success',
                     'message': 'Successfully logged in.',
-                    'auth_token': auth_token.decode()
+                    'auth_token': auth_token.decode(),
+                    'user': user.to_dict()
+
                 }
                 return make_response(jsonify(responseObject)), 200
         else:
@@ -253,7 +261,7 @@ def manager():
         try:
             return update_status('manager', auth_token, request.get_json())
         except Exception as e:
-            return create_response('fail', 'error', 401)
+            return create_response('fail', 'Threw an Exception', 401)
     else:
         return create_response('fail', 'Invalid Token', 401)
 
@@ -265,27 +273,37 @@ def bartender():
         try:
             return update_status('bartender', auth_token, request.get_json(), bartender = True)
         except Exception as e:
-            return create_response('fail', "error", 401)
+            return create_response('fail', "Threw an Exception", 401)
     else:
         return create_response('fail', 'Invalid Token', 401)
+
+def create_specials(input_specials):
+    specials = []
+    for special in input_specials:
+        specials.append(Special(special['special_id'], special['name'],
+            special['description'], special['bar_id'], special['object']))
+    return specials
 
 @app.route('/bar/<bar_id>', methods = ['GET'])
 def get_bar(bar_id):
     auth_header = request.headers.get('Authorization')
     auth_token, valid = get_authorization(auth_header)
     if valid:
-        content = request.get_json()
         try:
-            bar = db_ops.check_bar_db(content['bar_id'])
+            bar = db_ops.check_bar_db(bar_id)
             if bar:
-                responseObject = bar
-                responseObject['status'] = 'success'
-                responseObject['message'] = 'Found Bar'
+                bar = Bar(bar['bar_id'], bar['name'], bar['location'],
+                    bar['phone'], bar['cover'], specials = create_specials(bar['specials']))
+                responseObject  = {
+                    'status' : 'success',
+                    'message' : 'Found bar.',
+                    'bar': bar.to_dict()
+                }
                 return make_response(jsonify(responseObject)), 200
             else:
                 create_response('fail', 'Did not find bar', 401)
         except Exception as e:
-            return create_response('fail', e, 401)
+            return create_response('fail', 'Threw an Exception', 401)
     else:
         return create_response('fail', 'Invalid Token', 401)
 
@@ -302,12 +320,38 @@ def get_specials():
             }
             return make_response(jsonify(responseObject)), 200
         except Exception as e:
-            return create_response('fail', e, 401)
+            return create_response('fail', 'Threw an Exception', 401)
     else:
         return create_response('fail', 'Invalid Token', 401)
 
 @app.route('/specials/update', methods = ['PUT'])
 def update_specials():
-    return "NOTHING"
+    auth_header = request.headers.get('Authorization')
+    auth_token, valid = get_authorization(auth_header)
+    if valid:
+        try:
+            resp, success = User.decode_auth_token(auth_token)
+            user = db_ops.check_user_db(resp)
+            content = request.get_json()
+            bar_id = content['bar_id']
+            if not check_bar_id(bar_id, user['bars'], user['status']):
+                return create_response('fail', 'Incorrect priveleges.', 401)
+            if content['operation'] == 'update':
+                special_id = content['special_id']
+                update = content['update']
+                db_ops.update_special(bar_id, special_id, update)
+                return create_response('success', 'Updated Special', 200)
+            elif content['operation'] == 'create':
+                db_ops.create_special(bar_id, content['special'])
+                return create_response('success', 'Created Special.', 200)
+            elif content['operation'] == 'delete':
+                special_id = content['special_id']
+                db_ops.delete_special(bar_id, special_id)
+                return create_response('success', 'Deleted special.', 200)
+        except Exception as e:
+            traceback.print_exc(file=sys.stdout)
+            return create_response('fail', 'Threw an Exception', 401)
+    else:
+        return create_response('fail', 'Invalid Token', 401)
 
 app.run(debug=True)
