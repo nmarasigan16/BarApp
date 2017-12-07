@@ -26,12 +26,25 @@ export const authActionTypes = {
     registered: 'REGISTERED',
 };
 
-export const searchActionTypes = {
-    updateHistory: 'UPDATE_HISTORY'
+export const barActionTypes = {
+    setBar: 'SET_BAR',
+    updateSpecial: 'UPDATE_SPECIAL',
+    createSpecial: 'CREATE_SPECIAL',
+    updateCover: 'UPDATE_COVER',
+};
+
+export const specialsActionTypes = {
+    setSpecialObject: 'SET_SPECIAL_OBJECT',
+    updateSpecialObject: 'UPDATE_SPECIAL_OBJECT',
+    getSpecialObject: 'GET_SPECIAL_OBJECT',
+    createSpecialObject: 'CREATE_SPECIAL_OBJECT',
+    checkSpecialObject: 'CHECK_SPECIAL_OBJECT',
 };
 
 export default actionTypes = Object.assign({},
     profileActionTypes,
     apiActionTypes,
-    authActionTypes
+    authActionTypes,
+    barActionTypes,
+    specialsActionTypes,
 );

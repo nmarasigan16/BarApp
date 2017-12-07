@@ -449,6 +449,7 @@ exports[`renders correctly 1`] = `
                       },
                       Object {
                         "color": "darkgray",
+                        "fontStyle": "italic",
                       },
                     ]
                   }

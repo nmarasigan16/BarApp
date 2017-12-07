@@ -111,6 +111,7 @@ exports[`renders correctly with an object 1`] = `
             },
             Object {
               "color": "darkgray",
+              "fontStyle": "italic",
             },
           ]
         }

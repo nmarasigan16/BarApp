@@ -15,7 +15,7 @@ import Toast from 'react-native-simple-toast';
 import Form from '../../components/general/ValidatedTextInput/ValidatedForm';
 import TextInput from '../../components/general/ValidatedTextInput/ValidatedTextInput';
 import Dropdown from '../../components/general/ValidatedTextInput/ValidatedDropdown';
-import {isRequired, validators} from "../../lib/validators";
+import { validators } from "../../lib/validators";
 
 class RegistrationForm extends Component {
     constructor(props) {

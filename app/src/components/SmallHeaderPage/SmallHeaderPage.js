@@ -10,7 +10,7 @@ import Header from './header/HeaderComponent';
 import Body from './body/BodyComponent';
 import Nav from '../NavigationBar/NavigationBarComponent';
 
-const SmallHeaderPage = ({nav, name, children}) => {
+const SmallHeaderPage = ({nav, name, children, barcode}) => {
 
     const styles = {
         container : {
@@ -22,7 +22,7 @@ const SmallHeaderPage = ({nav, name, children}) => {
 
     return (
         <View style={{flex: 1}}>
-            <Nav nav={nav}/>
+            <Nav nav={nav} barcode={barcode}/>
             <ScrollView>
                 <Header name={name} />
                 <Body content={children} />

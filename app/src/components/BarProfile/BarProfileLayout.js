@@ -26,6 +26,7 @@ const BarProfileLayout = ({bar}) => {
             description: '$2 Tequila shots'
         }
     ];
+    const date = new Date();
     return (
         <View>
             <View
@@ -34,7 +35,7 @@ const BarProfileLayout = ({bar}) => {
                     alignItems: 'center',
                     justifyContent: 'center',
                 }}>
-                <CoverComponent cover={10}/>
+                <CoverComponent cover={bar.cover}/>
                 <RatioComponent guys={50}/>
             </View>
             <View
@@ -53,7 +54,7 @@ const BarProfileLayout = ({bar}) => {
                     Specials
                 </Text>
                 <FlatList
-                    data={specials}
+                    data={bar.specials[date.getDay()]}
                     keyExtractor={(item) => {
                         return item.id;
                     }}

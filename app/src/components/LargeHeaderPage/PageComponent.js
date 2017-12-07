@@ -10,7 +10,7 @@ import Body from './body/BodyComponent';
 import Header from './header/HeaderComponent';
 import Nav from '../NavigationBar/NavigationBarComponent';
 
-const PageComponent = ({nav, name, telephone, location, children}) => {
+const PageComponent = ({nav, name, telephone, location, children, barcode}) => {
 
     const styles = {
         container : {
@@ -22,7 +22,7 @@ const PageComponent = ({nav, name, telephone, location, children}) => {
 
     return (
         <View style={{flex: 1}}>
-            <Nav nav={nav}/>
+            <Nav nav={nav} barcode={barcode}/>
             <ScrollView>
                 <Header name={name} telephone={telephone} location={location}/>
                 <Body content={children} />

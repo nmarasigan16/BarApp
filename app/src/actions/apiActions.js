@@ -30,18 +30,34 @@ function processResponse(response, dataCallback, successCallback=[]) {
     }
 }
 
-export const fetchItem = () => ({
+export const fetchItem = () => (dispatch, getState) => {
+    let requests = getState().api.activeRequests;
+    requests += 1;
+    dispatch({
         type: actionTypes.fetchItem,
-});
+        requests
+    });
+};
 
-export const fetchItemError = (error) => ({
+
+export const fetchItemError = (error) => (dispatch, getState) => {
+    let requests = getState().api.activeRequests;
+    requests -= 1;
+    dispatch({
         type: actionTypes.fetchItemFailure,
-        error,
-});
+        requests,
+        error
+    });
+};
 
-export const fetchItemSuccess = () => ({
+export const fetchItemSuccess = () => (dispatch, getState) => {
+    let requests = getState().api.activeRequests;
+    requests -= 1;
+    dispatch({
         type: actionTypes.fetchItemSuccess,
-});
+        requests
+    });
+};
 
 export const makeGetRequest = (uri, dataCallback, successCallback=[], params={}) => (dispatch, getState) => {
     const uriWithParams = makeUrl(uri, params);
@@ -126,6 +142,13 @@ export const makeDeleteRequest = (uri, dataCallback, successCallback=[], params=
             error => dispatch(fetchItemError(error))
         )
 };
+
+export const requests = {
+        makeGetRequest,
+        makePutRequest,
+        makePostRequest,
+        makeDeleteRequest,
+    };
 
 export default apiActionCreators = Object.assign({}, {
     fetchItem,
