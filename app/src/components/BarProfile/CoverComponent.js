@@ -23,11 +23,11 @@ class CoverComponent extends Component {
 
     handleCoverReport(e) {
         prompt(
-            'Report Cover',
+            'Report Incorrect Cover',
             'Please enter how much cover is here',
             [
-                {text: 'Cancel', onPress: () => console.log('Cancel Pressed'), style: 'cancel'},
-                {text: 'OK', onPress: password => console.log('OK Pressed, password: ' + password)},
+                {text: 'Cancel', onPress: this.cancelPrompt, style: 'cancel'},
+                {text: 'OK', onPress: this.confirmPrompt},
             ],
             {
                 type: 'plain-text',
@@ -36,6 +36,14 @@ class CoverComponent extends Component {
                 placeholder: 'placeholder'
             }
         );
+    }
+
+    cancelPrompt() {
+        console.log('Cancelled');
+    }
+
+    confirmPrompt(cover) {
+        console.log('Confirmed')
     }
 
     render() {

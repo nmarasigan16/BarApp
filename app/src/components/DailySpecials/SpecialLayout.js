@@ -1,11 +1,9 @@
-import React, { Component } from 'react';
+import React from 'react';
+import PropTypes from 'prop-types';
 import {
-    View,
     FlatList,
 } from 'react-native';
 import SpecialRowComponent from "./SpecialRowComponent";
-import Text from '../general/text/TextComponent';
-import {colorScheme} from "../../lib/styles/ColorScheme";
 
 const SpecialLayout = ({specials}) => {
     const tempSpecials = [
@@ -31,6 +29,10 @@ const SpecialLayout = ({specials}) => {
             />
     )
 
+};
+
+SpecialLayout.propTypes = {
+    specials: PropTypes.array
 };
 
 export default SpecialLayout;

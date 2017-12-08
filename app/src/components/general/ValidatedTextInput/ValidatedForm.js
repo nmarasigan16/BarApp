@@ -18,27 +18,31 @@ class ValidatedForm extends Component {
     }
 
     getData() {
+        console.log(this.children);
         let data = {};
         let valid = true;
-        for(const input of this.children){
-            const name = input.getName();
-            const status = input.getData();
+        this.children.forEach((child) => {
+            const name = child.getName();
+            const status = child.getData();
             data[name] = status;
             if(!status.valid){
                 valid = false;
             }
-        }
+        });
         data.valid = valid;
         return data;
     }
 
     addChild(child) {
-        this.children.push(child);
+        if(child){
+            this.children.push(child);
+        }
     }
 
     render() {
+        this.children = [];
         const wrapped = React.Children.map(this.props.children,
-            (child, i) => React.cloneElement(child, {
+            (child) => React.cloneElement(child, {
                 ref: (child) => this.addChild(child)
             }),
             this);

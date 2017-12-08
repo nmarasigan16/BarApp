@@ -112,6 +112,8 @@ exports[`renders correctly 1`] = `
   <View
     style={
       Object {
+        "alignItems": "flex-end",
+        "justifyContent": "center",
         "width": 187.5,
       }
     }

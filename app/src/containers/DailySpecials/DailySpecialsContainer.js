@@ -7,6 +7,7 @@ import SpecialsLayout from '../../components/DailySpecials/SpecialLayout';
 class DailySpecials extends Component {
     constructor(props) {
         super(props);
+        this.navigationBarAction = this.navigationBarAction.bind(this);
     }
 
     static navigationOptions = {
@@ -19,9 +20,19 @@ class DailySpecials extends Component {
         ),
     };
 
+    navigationBarAction() {
+        const { navigation } = this.props;
+        navigation.navigate('DrawerOpen')
+    }
+
+
     render() {
+        const navigationBar = {
+            navigate: this.navigationBarAction,
+            name: 'bars'
+        };
         return (
-            <Page nav={this.props.navigation} name={'Today\'s Specials'}>
+            <Page nav={navigationBar} name={'Today\'s Specials'}>
                 <SpecialsLayout/>
             </Page>
         )

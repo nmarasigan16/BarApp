@@ -11,7 +11,7 @@ import { colorScheme } from "../../lib/styles/ColorScheme";
 import { responsiveFontSize } from 'react-native-responsive-dimensions';
 
 
-const RatioComponent = ({guys, girls}) => {
+const RatioComponent = ({guys}) => {
 
     return (
         <View style={{
@@ -63,7 +63,7 @@ const RatioComponent = ({guys, girls}) => {
                             color: 'deeppink',
                             fontSize: responsiveFontSize(3)
                         }}>
-                        {girls}%
+                        {100-guys}%
                     </Text>
                     <Icon
                         name={'venus'}

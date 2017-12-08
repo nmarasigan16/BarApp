@@ -6,7 +6,6 @@ export const API_ROOT = 'http://127.0.0.1:5000';
 //Helper function
 function processResponse(response, dataCallback, successCallback=[]) {
     return dispatch => {
-        console.log(response);
         if(response.ok) {
             response.json().then(
                 json => {
@@ -25,25 +24,40 @@ function processResponse(response, dataCallback, successCallback=[]) {
                     json => {
                         dispatch(fetchItemError(json.message));
                     }
-                ).catch(
-                    () => {dispatch(fetchItemError('non-JSON error received'))}
                 )
+            //TODO add handling of non json errors
         }
     }
 }
 
-export const fetchItem = () => ({
+export const fetchItem = () => (dispatch, getState) => {
+    let requests = getState().api.activeRequests;
+    requests += 1;
+    dispatch({
         type: actionTypes.fetchItem,
-});
+        requests
+    });
+};
 
-export const fetchItemError = (error) => ({
+
+export const fetchItemError = (error) => (dispatch, getState) => {
+    let requests = getState().api.activeRequests;
+    requests -= 1;
+    dispatch({
         type: actionTypes.fetchItemFailure,
-        error,
-});
+        requests,
+        error
+    });
+};
 
-export const fetchItemSuccess = () => ({
+export const fetchItemSuccess = () => (dispatch, getState) => {
+    let requests = getState().api.activeRequests;
+    requests -= 1;
+    dispatch({
         type: actionTypes.fetchItemSuccess,
-});
+        requests
+    });
+};
 
 export const makeGetRequest = (uri, dataCallback, successCallback=[], params={}) => (dispatch, getState) => {
     const uriWithParams = makeUrl(uri, params);
@@ -128,6 +142,13 @@ export const makeDeleteRequest = (uri, dataCallback, successCallback=[], params=
             error => dispatch(fetchItemError(error))
         )
 };
+
+export const requests = {
+        makeGetRequest,
+        makePutRequest,
+        makePostRequest,
+        makeDeleteRequest,
+    };
 
 export default apiActionCreators = Object.assign({}, {
     fetchItem,

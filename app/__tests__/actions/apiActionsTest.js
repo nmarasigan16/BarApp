@@ -17,30 +17,6 @@ urls.formatHeader = jest.fn(() => {
     return {};
 });
 
-describe('Pure action creators', () => {
-    it('should dispatch a fetch item', () => {
-        const action = {
-            type: actionTypes.fetchItem
-        };
-        expect(actions.fetchItem()).toEqual(action);
-    });
-
-    it('should dispatch an error', () => {
-        const action = {
-            type: actionTypes.fetchItemFailure,
-            error: 'oh no'
-        };
-        expect(actions.fetchItemError('oh no')).toEqual(action);
-    });
-
-    it('should stop fetching without an error', () => {
-        const action = {
-            type: actionTypes.fetchItemSuccess
-        };
-        expect(actions.fetchItemSuccess()).toEqual(action);
-    });
-});
-
 describe('Request making', () => {
     const dataCallback = jest.fn((json) => {
         return {
@@ -70,7 +46,10 @@ describe('Request making', () => {
         ];
 
         beforeEach(() => {
-            store = mockStore({auth: {header : ''}});
+            store = mockStore({
+                auth: {header : ''},
+                api: {activeRequests: 0},
+            });
         });
 
         it('makes a get request without a success callback', () => {
@@ -161,7 +140,10 @@ describe('Request making', () => {
         ];
 
         beforeEach(() => {
-            store = mockStore({auth: {header: ''}});
+            store = mockStore({
+                auth: {header : ''},
+                api: {activeRequests: 0},
+            });
         });
 
         it('makes a get request', () => {
