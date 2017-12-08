@@ -11,7 +11,7 @@ import {colorScheme} from "../../lib/styles/ColorScheme";
 
 
 
-const BarProfileLayout = ({bar}) => {
+const BarProfileLayout = ({bar, onSpecialPress}) => {
     // TODO link up with api
     const specials = [
         {
@@ -58,7 +58,7 @@ const BarProfileLayout = ({bar}) => {
                     keyExtractor={(item) => {
                         return item.id;
                     }}
-                    renderItem={({item}) => <SpecialRowComponent special={item}/>}
+                    renderItem={({item}) => <SpecialRowComponent special={item} onPress={onSpecialPress}/>}
                 />
             </View>
         </View>

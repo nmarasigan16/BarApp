@@ -1,6 +1,8 @@
 import { specialsActionTypes as actionTypes } from "../actions/actionTypes";
+import {onSpecial} from "../actions/specialsActions";
 
 const initialState = {
+    onSpecial: false,
     special: {
         id: 1,
         specialName: 'Rail Card',
@@ -75,6 +77,16 @@ const initialState = {
 
 function specialsReducer(state = initialState, action) {
     switch(action.type) {
+        case(actionTypes.onSpecial): {
+            return Object.assign({}, state, {
+                onSpecial: true
+            });
+        }
+        case(actionTypes.offSpecial): {
+            return Object.assign({}, state, {
+                onSpecial: false
+            });
+        }
         default:
             return state;
     }

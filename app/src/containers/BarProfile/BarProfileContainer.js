@@ -36,10 +36,11 @@ class BarProfileContainer extends Component {
         navigation.navigate('Barcode');
     }
 
-    onSpecialPress(specialId) {
-        const { specialsActions, bar } = this.props;
-        specialsActions.getSpecial(bar.id, specialId);
-    }
+    onSpecialPress = (specialId) => () => {
+        const { specialsActions, bar, navigation } = this.props;
+        //specialsActions.getSpecial(bar.id, specialId);
+        navigation.navigate('RailCard');
+    };
 
     render() {
         const navigationBar = {

@@ -34,6 +34,8 @@ export const barActionTypes = {
 };
 
 export const specialsActionTypes = {
+    onSpecial: 'ON_SPECIAL',
+    offSpecial: 'OFF_SPECIAL',
     setSpecialObject: 'SET_SPECIAL_OBJECT',
     updateSpecialObject: 'UPDATE_SPECIAL_OBJECT',
     getSpecialObject: 'GET_SPECIAL_OBJECT',

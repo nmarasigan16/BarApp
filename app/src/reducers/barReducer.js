@@ -31,6 +31,13 @@ const initialState = {
                     description: '$2.50 Draft Specials'
                 },
                 {
+                    id: 1,
+                    description: '$3 drafts.  Includes Legend\'s Lager, Guinness, Blue Moon, Coors Light, Miller Lite, and more!',
+                    object: {
+                    name: 'Rail Card'
+                    }
+                },
+                {
                     id: 6,
                     description: '$2 Miller, Coors'
                 },

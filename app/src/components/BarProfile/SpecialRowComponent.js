@@ -7,7 +7,7 @@ import Icon from 'react-native-vector-icons/FontAwesome';
 import { colorScheme } from "../../lib/styles/ColorScheme";
 import Text from '../general/text/TextComponent';
 
-const SpecialRowComponent = ({special}) => {
+const SpecialRowComponent = ({special, onPress}) => {
     return (
         <View style={{
             flexDirection: 'column',
@@ -38,7 +38,7 @@ const SpecialRowComponent = ({special}) => {
                 <View style={{
                     alignSelf: 'center'
                 }}>
-                    <TouchableOpacity>
+                    <TouchableOpacity onPress={onPress(special.id)}>
                         <Text
                             style={{
                                 color: colorScheme.secondaryAccent,

@@ -17,6 +17,12 @@ export const getSpecial = (barId, id) => (dispatch) => {
     dispatch(requests.makeGetRequest(uri, setSpecial))
 };
 
+export const onSpecial = () => {
+    return {
+
+    }
+}
+
 
 export default specialsActions = Object.assign({}, {
     setSpecial,

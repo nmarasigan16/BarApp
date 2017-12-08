@@ -4,6 +4,7 @@ import DrawerNav from './DrawerNav';
 import LoginPage from '../../containers/LoginPage/LoginPage';
 import RegistrationPage from '../../containers/RegistrationPage/RegistrationPage';
 import BarcodePage from '../../containers/Barcode/BarcodeContainer';
+import RailCardPage from '../../containers/BarProfile/Specials/RailCard/RailCardContainer';
 
 const StackNav = StackNavigator({
     Home: {
@@ -21,9 +22,12 @@ const StackNav = StackNavigator({
     Barcode: {
         screen: BarcodePage
     },
+    RailCard: {
+        screen: RailCardPage
+    }
 },
     {
-        initialRouteName: 'Login',
+        initialRouteName: 'Home',
         gesturesEnabled: false,
 });
 
