@@ -7,11 +7,13 @@ import requests
 
 from user import User
 from bar import Bar
+from special import Special
 from db_ops import DBOperations
 from flask import Flask, jsonify, request, make_response
 from flask_pymongo import PyMongo
 from flask_bcrypt import Bcrypt
 from validate_email import validate_email
+from card_special import Card
 
 app_id = '1977845439150436'
 app_secret = 'f0b983e1471377f2a3f1eab8d3813ca3'
@@ -55,7 +57,8 @@ def register():
             responseObject = {
                 'status': 'success',
                 'message': 'Successfully registered.',
-                'auth_token': auth_token.decode()
+                'auth_token': auth_token.decode(),
+                'user' : user.to_dict()
             }
             db_ops.add_user_to_db(user)
             return make_response(jsonify(responseObject)), 200
@@ -76,11 +79,16 @@ def login():
         if user and bcrypt.check_password_hash(
             user['password'], content['password']):
             auth_token = User.encode_auth_token(user['username'])
+
+            user = User(user['username'], user['password'], user['name'], user['status'],
+                user['age'], user['gender'], bcrypt)
+
             if auth_token:
                 responseObject = {
                     'status': 'success',
                     'message': 'Successfully logged in.',
-                    'auth_token': auth_token.decode()
+                    'auth_token': auth_token.decode(),
+                    'user': user.to_dict()
                 }
                 return make_response(jsonify(responseObject)), 200
         else:
@@ -253,7 +261,7 @@ def manager():
         try:
             return update_status('manager', auth_token, request.get_json())
         except Exception as e:
-            return create_response('fail', 'error', 401)
+            return create_response('fail', 'Threw an Exception', 401)
     else:
         return create_response('fail', 'Invalid Token', 401)
 
@@ -265,27 +273,37 @@ def bartender():
         try:
             return update_status('bartender', auth_token, request.get_json(), bartender = True)
         except Exception as e:
-            return create_response('fail', "error", 401)
+            return create_response('fail', "Threw an Exception", 401)
     else:
         return create_response('fail', 'Invalid Token', 401)
+
+def create_specials(input_specials):
+    specials = []
+    for special in input_specials:
+        specials.append(Special(special['special_id'], special['special_name'],
+            special['description'], special['bar_id'], special['object']))
+    return specials
 
 @app.route('/bar/<bar_id>', methods = ['GET'])
 def get_bar(bar_id):
     auth_header = request.headers.get('Authorization')
     auth_token, valid = get_authorization(auth_header)
     if valid:
-        content = request.get_json()
         try:
-            bar = db_ops.check_bar_db(content['bar_id'])
+            bar = db_ops.check_bar_db(bar_id)
             if bar:
-                responseObject = bar
-                responseObject['status'] = 'success'
-                responseObject['message'] = 'Found Bar'
+                bar = Bar(bar['bar_id'], bar['name'], bar['location'],
+                    bar['phone'], bar['cover'], specials = create_specials(bar['specials']))
+                responseObject  = {
+                    'status' : 'success',
+                    'message' : 'Found bar.',
+                    'bar': bar.to_dict()
+                }
                 return make_response(jsonify(responseObject)), 200
             else:
                 create_response('fail', 'Did not find bar', 401)
         except Exception as e:
-            return create_response('fail', e, 401)
+            return create_response('fail', 'Threw an Exception', 401)
     else:
         return create_response('fail', 'Invalid Token', 401)
 
@@ -302,12 +320,124 @@ def get_specials():
             }
             return make_response(jsonify(responseObject)), 200
         except Exception as e:
-            return create_response('fail', e, 401)
+            return create_response('fail', 'Threw an Exception', 401)
     else:
         return create_response('fail', 'Invalid Token', 401)
 
 @app.route('/specials/update', methods = ['PUT'])
 def update_specials():
-    return "NOTHING"
+    auth_header = request.headers.get('Authorization')
+    auth_token, valid = get_authorization(auth_header)
+    if valid:
+        try:
+            resp, success = User.decode_auth_token(auth_token)
+            user = db_ops.check_user_db(resp)
+            if user == None:
+                return create_response('fail', 'User does not exist', 401)
+            content = request.get_json()
+            bar_id = content['bar_id']
+            if not check_bar_id(bar_id, user['bars'], user['status']):
+                return create_response('fail', 'Incorrect priveleges.', 401)
+            if content['operation'] == 'update':
+                special_id = content['special_id']
+                update = content['update']
+                db_ops.update_special(bar_id, special_id, update)
+                return create_response('success', 'Updated Special', 200)
+            elif content['operation'] == 'create':
+                db_ops.create_special(bar_id, content['special'])
+                return create_response('success', 'Created Special.', 200)
+            elif content['operation'] == 'delete':
+                special_id = content['special_id']
+                db_ops.delete_special(bar_id, special_id)
+                return create_response('success', 'Deleted special.', 200)
+        except Exception as e:
+            return create_response('fail', 'Threw an Exception', 401)
+    else:
+        return create_response('fail', 'Invalid Token', 401)
+
+@app.route('/user_specials/<bar_id>/<special_id>/create', methods = ['POST'])
+def create_user_specials(bar_id, special_id):
+    auth_header = request.headers.get('Authorization')
+    auth_token, valid = get_authorization(auth_header)
+    if valid:
+        try:
+            resp, success = User.decode_auth_token(auth_token)
+            user = db_ops.check_user_db(resp)
+            if user == None:
+                return create_response('fail', 'User does not exist', 401)
+            special_object = db_ops.find_user_special(bar_id, int(special_id))
+            if special_object == None:
+                return create_response('fail',
+                    'Bar does not have a special object', 401)
+            obj = db_ops.create_user_special(bar_id, special_id, user, special_object)
+            if obj  == None:
+                return create_response('fail', 'failed to create object', 401)
+            responseObject = {
+                'status': 'success',
+                'message': 'Successfully created object.',
+                'object': obj,
+                'username': user['username']
+            }
+            return make_response(jsonify(responseObject)), 200
+        except Exception as e:
+            return create_response('fail', 'Threw an Exception', 401)
+    else:
+        return create_response('fail', 'Invalid Token', 401)
+
+@app.route('/user_specials/<bar_id>/<special_id>/get', methods = ['GET'])
+def get_user_special(bar_id, special_id):
+    auth_header = request.headers.get('Authorization')
+    auth_token, valid = get_authorization(auth_header)
+    if valid:
+        try:
+            resp, success = User.decode_auth_token(auth_token)
+            user = db_ops.check_user_db(resp)
+            if user == None:
+                return create_response('fail', 'User does not exist', 401)
+            obj = db_ops.get_user_special(bar_id, special_id, user['specials'])
+            if obj == None:
+                return create_response('fail', 'Object was not found', 401)
+            responseObject = {
+                'status': 'success',
+                'message': 'Successfully retreived object.',
+                'object': obj,
+                'username': user['username']
+            }
+            return make_response(jsonify(responseObject)), 200
+        except Exception as e:
+            return create_response('fail', 'Threw an Exception', 401)
+    else:
+        return create_response('fail', 'Invalid Token', 401)
+
+@app.route('/user_specials/<bar_id>/<special_id>/update', methods = ['PUT'])
+def update_user_special(bar_id, special_id):
+    auth_header = request.headers.get('Authorization')
+    auth_token, valid = get_authorization(auth_header)
+    if valid:
+        try:
+            resp, success = User.decode_auth_token(auth_token)
+            user = db_ops.check_user_db(resp)
+            content = request.get_json()
+            if not check_bar_id(bar_id, user['bars'], user['status']):
+                return create_response('fail', 'Incorrect priveleges.', 401)
+            obj = db_ops.get_user_special(bar_id, special_id, user['specials'])
+            if obj == None:
+                return create_response('fail', 'Object was not found', 401)
+            card = Card(card = obj)
+            status = db_ops.update_user_special(bar_id, special_id, user, card, content['update'])
+            if status == None:
+                return create_response('fail', 'Update not possible', 401)
+            responseObject = {
+                'status': 'success',
+                'message': 'Successfully retreived object.',
+                'object': status,
+                'username': user['username']
+            }
+            return make_response(jsonify(responseObject)), 200
+        except Exception as e:
+            traceback.print_exc(file=sys.stdout)
+            return create_response('fail', 'Threw an Exception', 401)
+    else:
+        return create_response('fail', 'Invalid Token', 401)
 
 app.run(debug=True)
