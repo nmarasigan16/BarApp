@@ -4,8 +4,7 @@ import { bindActionCreators } from 'redux';
 import specialsActions from '../../actions/specialsActions';
 import Page from '../../components/LargeHeaderPage/PageComponent';
 import BarProfileLayout from '../../components/BarProfile/BarProfileLayout';
-import Icon from 'react-native-vector-icons/FontAwesome';
-import { colorScheme } from "../../lib/styles/ColorScheme";
+import { NavigationActions } from 'react-navigation';
 
 
 class BarProfileContainer extends Component {
@@ -17,18 +16,13 @@ class BarProfileContainer extends Component {
     }
 
     static navigationOptions = {
-        drawerLabel: 'Legends',
-        drawerIcon: () => (
-            <Icon
-                name={'beer'}
-                color={colorScheme.secondary}
-            />
-        ),
+        header: null,
     };
 
     navigationBarAction() {
         const { navigation } = this.props;
-        navigation.navigate('DrawerOpen');
+        const back = NavigationActions.back();
+        navigation.dispatch(back);
     }
 
     barcodeAction() {
@@ -45,7 +39,7 @@ class BarProfileContainer extends Component {
     render() {
         const navigationBar = {
             navigate: this.navigationBarAction,
-            name: 'bars'
+            name: 'chevron-left'
         };
 
         const barcode = {

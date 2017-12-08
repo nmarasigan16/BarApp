@@ -5,6 +5,7 @@ import LoginPage from '../../containers/LoginPage/LoginPage';
 import RegistrationPage from '../../containers/RegistrationPage/RegistrationPage';
 import BarcodePage from '../../containers/Barcode/BarcodeContainer';
 import RailCardPage from '../../containers/BarProfile/Specials/RailCard/RailCardContainer';
+import BarPage from '../../containers/BarProfile/BarProfileContainer';
 
 const StackNav = StackNavigator({
     Home: {
@@ -24,7 +25,10 @@ const StackNav = StackNavigator({
     },
     RailCard: {
         screen: RailCardPage
-    }
+    },
+    Bar: {
+        screen: BarPage
+    },
 },
     {
         initialRouteName: 'Home',

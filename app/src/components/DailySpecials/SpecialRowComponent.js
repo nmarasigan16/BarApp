@@ -10,7 +10,7 @@ import { colorScheme } from "../../lib/styles/ColorScheme";
 import Text from '../general/text/TextComponent';
 import Divider from '../general/divider/DividerComponent';
 
-const SpecialRowComponent = ({special}) => {
+const SpecialRowComponent = ({special, onPress}) => {
 
     const { width, height } = Dimensions.get('window');
 
@@ -20,7 +20,7 @@ const SpecialRowComponent = ({special}) => {
             marginRight: width/30,
             marginLeft: width/30,
         }}>
-        <TouchableOpacity>
+        <TouchableOpacity onPress={onPress}>
             <View
                 style={{
                     flexDirection: 'column',

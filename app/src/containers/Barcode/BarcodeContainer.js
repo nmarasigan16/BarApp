@@ -4,6 +4,8 @@ import {
     Dimensions,
 } from 'react-native';
 import { NavigationActions } from 'react-navigation';
+import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
 import QRCode from 'react-native-qrcode';
 import Page from '../../components/SmallHeaderPage/SmallHeaderPage';
 
@@ -30,12 +32,17 @@ class BarcodeContainer extends Component {
             name: 'chevron-left'
         };
 
-        const{ width, height } = Dimensions.get('window');
-        const x = {
-            user: 'egarsenal16',
-            specialId: '5',
+        const { special, bar, onSpecial } = this.props;
+
+        const data = onSpecial ? {
+            bar: bar.id,
+            special: special.id
+        } : {
+            bar: bar.id
         };
-        const y = JSON.stringify(x);
+
+
+        const{ width, height } = Dimensions.get('window');
 
         return (
             <Page
@@ -49,7 +56,7 @@ class BarcodeContainer extends Component {
                         marginTop: height/8
                     }}>
                         <QRCode
-                            value={y}
+                            value={data}
                             size={width < height ? width/2 : height/2}
                             bgColor='black'
                             fgColor='white'
@@ -61,4 +68,18 @@ class BarcodeContainer extends Component {
     }
 }
 
-export default BarcodeContainer;
+function mapDispatchToProps(dispatch) {
+    return {
+        specialsActions: bindActionCreators(specialsActions, dispatch),
+    };
+}
+
+function mapStateToProps(state) {
+    return {
+        bar: state.bar.bar,
+        special: state.specials.special,
+        onSpecial: state.specials.onSpecial,
+    };
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(BarcodeContainer);

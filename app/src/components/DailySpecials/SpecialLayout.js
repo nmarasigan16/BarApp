@@ -5,7 +5,7 @@ import {
 } from 'react-native';
 import SpecialRowComponent from "./SpecialRowComponent";
 
-const SpecialLayout = ({specials}) => {
+const SpecialLayout = ({specials, onPress}) => {
     const tempSpecials = [
         {
             barName: 'Legends',
@@ -25,7 +25,7 @@ const SpecialLayout = ({specials}) => {
         <FlatList
             data={specials}
             keyExtractor={(item, index) => item.barId}
-            renderItem={({item}) => <SpecialRowComponent special={item}/>}
+            renderItem={({item}) => <SpecialRowComponent special={item} onPress={onPress}/>}
             />
     )
 

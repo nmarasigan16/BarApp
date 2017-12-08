@@ -8,6 +8,7 @@ class DailySpecials extends Component {
     constructor(props) {
         super(props);
         this.navigationBarAction = this.navigationBarAction.bind(this);
+        this.onPress = this.onPress.bind(this);
     }
 
     static navigationOptions = {
@@ -25,6 +26,10 @@ class DailySpecials extends Component {
         navigation.navigate('DrawerOpen')
     }
 
+    onPress() {
+        this.props.navigation.navigate('Bar');
+    }
+
 
     render() {
         const navigationBar = {
@@ -33,7 +38,7 @@ class DailySpecials extends Component {
         };
         return (
             <Page nav={navigationBar} name={'Today\'s Specials'}>
-                <SpecialsLayout/>
+                <SpecialsLayout onPress={this.onPress}/>
             </Page>
         )
     }

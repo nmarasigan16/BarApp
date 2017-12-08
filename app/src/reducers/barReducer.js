@@ -49,7 +49,7 @@ const initialState = {
             5: [],
             6: [],
         },
-        cover: 0,
+        cover: 10,
     }
 };
 

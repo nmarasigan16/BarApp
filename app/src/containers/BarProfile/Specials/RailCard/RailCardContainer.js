@@ -8,6 +8,7 @@ import { bindActionCreators } from 'redux';
 import { NavigationActions } from 'react-navigation';
 import Page from '../../../../components/SmallHeaderPage/SmallHeaderPage';
 import RailCardLayout from '../../../../components/BarProfile/Specials/RailCard/RailCardLayout';
+import specialsActions from "../../../../actions/specialsActions";
 
 class RailCardContainer extends Component {
     constructor(props) {
@@ -19,6 +20,14 @@ class RailCardContainer extends Component {
     static navigationOptions = {
         header: null
     };
+
+    componentWillMount() {
+        this.props.specialsActions.onSpecial();
+    }
+
+    componentWillUnmount() {
+        this.props.specialsActions.offSpecial();
+    }
 
     navigationBarAction() {
         const { navigation } = this.props;

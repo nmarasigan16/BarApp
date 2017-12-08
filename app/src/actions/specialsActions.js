@@ -19,12 +19,20 @@ export const getSpecial = (barId, id) => (dispatch) => {
 
 export const onSpecial = () => {
     return {
+        type: actionTypes.onSpecial
+    };
+};
 
+export const offSpecial = () => {
+    return {
+        type: actionTypes.offSpecial
     }
-}
+};
 
 
 export default specialsActions = Object.assign({}, {
     setSpecial,
-    getSpecial
+    getSpecial,
+    onSpecial,
+    offSpecial,
 });
