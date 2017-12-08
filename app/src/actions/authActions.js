@@ -4,11 +4,11 @@ import { storeItem, getItem, keys } from "../lib/storage";
 import { fetchStarred } from './profileActions';
 
 
-export const authenticate = (response) => {
+export const setAuthUser = (user) => {
     return {
-        type: actionTypes.authenticate,
-        token: response.access_token
-    };
+        type: actionTypes.setAuthUser,
+        user
+    }
 };
 
 export const setToken = (token) => {
@@ -31,6 +31,7 @@ export const clearToken = (token) => (dispatch) => {
 };
 
 export const processAuthResponse = (response) => (dispatch) => {
+    dispatch(setAuthUser(response.user));
     return dispatch(setToken(response.auth_token));
 };
 

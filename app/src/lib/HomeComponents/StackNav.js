@@ -31,7 +31,7 @@ const StackNav = StackNavigator({
     },
 },
     {
-        initialRouteName: 'Home',
+        initialRouteName: 'Login',
         gesturesEnabled: false,
 });
 

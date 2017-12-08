@@ -53,7 +53,7 @@ export function parseUrl(url) {
 export function formatHeaders(authState, otherHeaders = {}) {
     let headers = {};
     if (authState.token) {
-        headers['Authorization'] = `token ${authState.token}`;
+        headers['Authorization'] = authState.token;
     }
     headers = Object.assign({}, otherHeaders, headers);
     return headers;

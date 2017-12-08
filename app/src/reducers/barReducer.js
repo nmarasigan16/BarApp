@@ -10,8 +10,8 @@ const initialState = {
             longitude: -88.2311641,
         },
         phone: '2173557674',
-        specials: {
-            0: [{
+        specials: [
+            [{
                     id: 1,
                     description: '$3 drafts.  Includes Legend\'s Lager, Guinness, Blue Moon, Coors Light, Miller Lite, and more!',
                     object: {
@@ -22,10 +22,10 @@ const initialState = {
                     id: 2,
                     description: '$2 Tequila shots'
                 }],
-            1: [],
-            2: [],
-            3: [],
-            4: [
+            [],
+            [],
+            [],
+            [
                 {
                     id: 5,
                     description: '$2.50 Draft Specials'
@@ -46,15 +46,15 @@ const initialState = {
                     description: '$2 Sweet Tea Vodka'
                 }
             ],
-            5: [ {
+            [ {
                     id: 1,
                     description: '$3 drafts.  Includes Legend\'s Lager, Guinness, Blue Moon, Coors Light, Miller Lite, and more!',
                     object: {
                     name: 'Rail Card'
                     }
                 },],
-            6: [],
-        },
+            [],
+        ],
         cover: 10,
     }
 };

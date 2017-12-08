@@ -6,11 +6,16 @@ import {
 import {colorScheme} from "../../../../lib/styles/ColorScheme";
 import RailCardRow from './RailCardRow';
 
-const RailCardLayout = ({rows}) => {
+const RailCardLayout = ({object}) => {
 
-    rows.forEach((item, i) => {
-        item.key = i + 1;
+    const arr = Object.keys(object).map((key) => {
+        return {beerName: key, value: object[key]}
     });
+
+    arr.forEach((row, i) => {
+        row.key = i + 1;
+    });
+
 
     return (
         <View style={{
@@ -21,7 +26,7 @@ const RailCardLayout = ({rows}) => {
             marginBottom: 20,
         }}>
             <FlatList
-                data={rows}
+                data={arr}
                 keyExtractor={(item) => item.key}
                 renderItem={({item}) => <RailCardRow row={item}/>}
                 />

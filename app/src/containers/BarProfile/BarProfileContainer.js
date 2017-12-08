@@ -52,7 +52,6 @@ class BarProfileContainer extends Component {
                 nav={navigationBar}
                 name={this.props.bar.name}
                 telephone={this.props.bar.phone}
-                location={this.props.bar.location}
                 barcode={barcode}
                 >
                 <BarProfileLayout bar={this.props.bar} onSpecialPress={this.onSpecialPress}/>

@@ -62,7 +62,7 @@ class RailCardContainer extends Component {
                 nav={navigationBar}
                 barcode={barcode}
                 name={`Your ${special.specialName}`}>
-                <RailCardLayout rows={special.rows}/>
+                <RailCardLayout object={special.object}/>
             </Page>
         );
     }

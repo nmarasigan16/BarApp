@@ -28,9 +28,9 @@ class RailCardRow extends Component {
     constructor(props) {
         super(props);
 
+        console.log(this.props.row);
         this.state = {
-            stamps: 0,
-            amount: props.row.amount,
+            amount_done: props.row.value[0],
         };
 
     }
@@ -39,12 +39,21 @@ class RailCardRow extends Component {
         return stampOptions[Math.floor(Math.random() * stampOptions.length)];
     }
 
+
+    formatImageName(name) {
+        let lower = name.toLowerCase();
+        lower = lower.split(' ').join('_');
+        return lower;
+    }
+
     render() {
         const {width, height} = Dimensions.get('window');
         const { row } = this.props;
-        let stamps = this.state.amount;
+        let stamps = this.state.amount_needed;
 
-        const image = Platform.OS === 'ios' ? row.beerName : `asset:/${row.beerName}.png`;
+        const beerName = this.formatImageName(row.beerName);
+
+        const image = Platform.OS === 'ios' ? beerName : `asset:/${beerName}.png`;
 
         return (
             <View style={{
