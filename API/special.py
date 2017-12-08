@@ -8,9 +8,9 @@ class Special:
         self.object = object
 
     def serialize(self):
-        special = {'special_id': self.special_id, 'name': self.name,
+        special = {'special_id': self.special_id, 'special_name': self.name,
                 'description': self.description, 'bar_id': self.bar_id,
                 'object': None}
-        # if self.object!=None:
-        #     special['object']  = self.object.serialize()
+        if self.object != None:
+            special['object']  = self.object.serialize()
         return special

@@ -19,11 +19,12 @@ class User:
         self.age = age
         self.gender = gender
         self.bars = bars
+        self.specials = {}
 
     def to_dict(self):
         ret ={'username': self.username, 'name':self.name,
             'status':self.status, 'age': self.age, 'gender': self.gender,
-            'bars':self.bars}
+            'bars':self.bars, 'specials': self.specials}
         return ret
 
     @staticmethod

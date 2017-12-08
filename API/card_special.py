@@ -26,10 +26,11 @@ class Card:
         Updates a drink by a certain quantity
         :return: string if fails
         """
-        if quant <= self.card[drink][1]:
+        if quant + self.card[drink][0]  <= self.card[drink][1]:
             self.card[drink][0] += quant
+            return True
         else:
-            return "Cannot add more than max quantity"
+            return False
 
     def check_completed(self):
         """
@@ -40,3 +41,6 @@ class Card:
             if drink[1][0] != drink[1][1]:
                 return False
         return True
+
+    def serialize(self):
+        return self.card
