@@ -395,8 +395,6 @@ def get_user_special(bar_id, special_id):
             if user == None:
                 return create_response('fail', 'User does not exist', 401)
             obj = db_ops.get_user_special(bar_id, special_id, user['specials'])
-            if obj == None:
-                return create_response('fail', 'Object was not found', 401)
             responseObject = {
                 'status': 'success',
                 'message': 'Successfully retreived object.',
