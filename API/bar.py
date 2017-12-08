@@ -13,3 +13,10 @@ class Bar:
         self.cover = cover
         self.phone = phone
         self.specials = specials
+
+    def to_dict(self):
+        obj = {'bar_id': self.bar_id, 'name':self.name,
+            'location': self.location, 'phone': self.phone,
+            'specials': []}
+        for special in self.specials:
+            obj['specials'].append(special.serialize())
