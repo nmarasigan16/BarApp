@@ -13,6 +13,10 @@ class BarcodeContainer extends Component {
     constructor(props) {
         super(props);
         this.navigationBarAction = this.navigationBarAction.bind(this);
+
+        this.state = {
+            onSpecial: this.props.onSpecial,
+        };
     }
 
     static navigationOptions = {
@@ -24,7 +28,6 @@ class BarcodeContainer extends Component {
         const back = NavigationActions.back();
         navigation.dispatch(back);
     }
-
 
     render() {
         const navigationBar = {

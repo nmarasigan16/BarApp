@@ -46,7 +46,13 @@ const initialState = {
                     description: '$2 Sweet Tea Vodka'
                 }
             ],
-            5: [],
+            5: [ {
+                    id: 1,
+                    description: '$3 drafts.  Includes Legend\'s Lager, Guinness, Blue Moon, Coors Light, Miller Lite, and more!',
+                    object: {
+                    name: 'Rail Card'
+                    }
+                },],
             6: [],
         },
         cover: 10,

@@ -1,5 +1,4 @@
 import { combineReducers } from 'redux';
-import profile from './profileReducer';
 import api from './apiReducer';
 import auth from './authReducer';
 import bar from './barReducer';

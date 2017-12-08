@@ -2,7 +2,7 @@ import { specialsActionTypes as actionTypes } from "../actions/actionTypes";
 import {onSpecial} from "../actions/specialsActions";
 
 const initialState = {
-    onSpecial: false,
+    onSpecial: null,
     special: {
         id: 1,
         specialName: 'Rail Card',
