@@ -41,6 +41,7 @@ export const specialsActionTypes = {
     getSpecialObject: 'GET_SPECIAL_OBJECT',
     createSpecialObject: 'CREATE_SPECIAL_OBJECT',
     checkSpecialObject: 'CHECK_SPECIAL_OBJECT',
+    getSpecialList: 'GET_SPECIAL_LIST',
 };
 
 export default actionTypes = Object.assign({},

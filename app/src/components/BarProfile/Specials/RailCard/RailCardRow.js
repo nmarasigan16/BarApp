@@ -28,7 +28,6 @@ class RailCardRow extends Component {
     constructor(props) {
         super(props);
 
-        console.log(this.props.row);
         this.state = {
             amount_done: props.row.value[0],
         };
@@ -49,7 +48,7 @@ class RailCardRow extends Component {
     render() {
         const {width, height} = Dimensions.get('window');
         const { row } = this.props;
-        let stamps = this.state.amount_needed;
+        let stamps = this.state.amount_done;
 
         const beerName = this.formatImageName(row.beerName);
 

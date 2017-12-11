@@ -95,7 +95,7 @@ def enableProguardInReleaseBuilds = false
 
 android {
     compileSdkVersion 23
-    buildToolsVersion "23.0.1"
+    buildToolsVersion '26.0.2'
 
     defaultConfig {
         applicationId "com.assignment3"
@@ -137,6 +137,7 @@ android {
 }
 
 dependencies {
+    compile project(':react-native-camera')
     compile project(':react-native-prompt-android')
     compile project(':react-native-material-kit')
     compile project(':react-native-vector-icons')

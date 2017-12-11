@@ -22,7 +22,15 @@ const initialState = {
                     id: 2,
                     description: '$2 Tequila shots'
                 }],
-            [],
+            [
+                {
+                    id: 1,
+                    description: '$3 drafts.  Includes Legend\'s Lager, Guinness, Blue Moon, Coors Light, Miller Lite, and more!',
+                    object: {
+                        name: 'Rail Card'
+                    },
+                }
+            ],
             [],
             [],
             [

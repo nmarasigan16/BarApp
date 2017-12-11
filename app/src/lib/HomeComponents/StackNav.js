@@ -6,6 +6,7 @@ import RegistrationPage from '../../containers/RegistrationPage/RegistrationPage
 import BarcodePage from '../../containers/Barcode/BarcodeContainer';
 import RailCardPage from '../../containers/BarProfile/Specials/RailCard/RailCardContainer';
 import BarPage from '../../containers/BarProfile/BarProfileContainer';
+import BarcodeScanner from '../../containers/Barcode/BarcodeScanner';
 
 const StackNav = StackNavigator({
     Home: {

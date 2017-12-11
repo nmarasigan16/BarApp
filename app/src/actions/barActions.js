@@ -12,3 +12,8 @@ export const getBar = (id) => (dispatch) => {
     const url = `${API_ROOT}/bars`;
     dispatch(requests.makeGetRequest(url, setBar, undefined, {id}));
 };
+
+export default barActions = {
+    getBar,
+    setBar,
+}
