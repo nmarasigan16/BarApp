@@ -10,7 +10,7 @@ class Special:
     def serialize(self):
         special = {'special_id': self.special_id, 'special_name': self.name,
                 'description': self.description, 'bar_id': self.bar_id,
-                'object': None}
-        if self.object != None:
+                'object': self.object}
+        if self.object != None and not isinstance(self.object, dict):
             special['object']  = self.object.serialize()
         return special

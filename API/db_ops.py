@@ -71,53 +71,64 @@ class DBOperations:
         else:
             raise Exception('Failed to update')
 
-    def get_specials(self):
+    def get_specials(self, day):
         cursor = self.mongo.db.Bars.find({})
         specials = []
         for bar in cursor:
-            for spec in bar['specials']:
+            for spec in bar['specials'][day]:
                 to_add = Special(spec['special_id'], spec['special_name'],
                     spec['description'], spec['bar_id'],
                     object = spec['object'])
                 specials.append(to_add.serialize())
         return specials
 
-    def delete_special(self, bar_id, special_id):
+    def delete_special(self, bar_id, special_id, day):
         bar = self.mongo.db.Bars.find_one({'bar_id': bar_id})
-        specials = bar['specials']
+        specials = bar['specials'][day]
         to_remove = {}
+        found = False
         for special in specials:
             if special['special_id'] == special_id:
                 specials.remove(special)
+                found = True
+        if not found:
+            return None
         update = self.mongo.db.Bars.update_one({'bar_id': bar_id},
-                    {'$set': {'specials': specials}})
+                    {'$set': {'specials': bar['specials']}})
+        return "SUCCESS"
 
-    def create_special(self, bar_id, special):
+    def create_special(self, bar_id, special, day):
         bar = self.mongo.db.Bars.find_one({'bar_id': bar_id})
-        specials = bar['specials']
-        if len(specials)<=0:
-            special['special_id'] = 1
-        else:
-            special['special_id'] = max(specials, key=lambda x:x['special_id'])['special_id'] + 1
+        specials = bar['specials'][day]
+        total = 0
+        for l in bar['specials']:
+            for s in l:
+                total = max(total, s['special_id'])
+        special['special_id'] = total + 1
         to_add = Special(special['special_id'], special['special_name'],
                     special['description'], special['bar_id'],
                     object = special['object'])
         specials.append(to_add.serialize())
         update = self.mongo.db.Bars.update_one({'bar_id': bar_id},
-                    {'$set': {'specials': specials}})
+                    {'$set': {'specials': bar['specials']}})
 
-    def update_special(self, bar_id, special_id, update):
+    def update_special(self, bar_id, special_id, update, day):
         bar = self.mongo.db.Bars.find_one({'bar_id': bar_id})
-        specials = bar['specials']
+        specials = bar['specials'][day]
+        found = False
         for special in specials:
             if special['special_id'] == special_id:
                 special[update[0]] = update[1]
+                found = True
+        if not found:
+            return None
         update = self.mongo.db.Bars.update_one({'bar_id': bar_id},
-                    {'$set': {'specials': specials}})
+                    {'$set': {'specials': bar['specials']}})
+        return "SUCCESS"
 
-    def find_user_special(self, bar_id, special_id):
+    def find_user_special(self, bar_id, special_id, day):
         bar = self.mongo.db.Bars.find_one({'bar_id': bar_id})
-        specials = bar['specials']
+        specials = bar['specials'][day]
         to_remove = {}
         for special in specials:
             if special['special_id'] == special_id and special['object'] != None:
