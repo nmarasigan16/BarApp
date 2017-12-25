@@ -55,13 +55,19 @@ This describes the endpoints and requirements for each endpoint.  |WIP| indicate
 
 + Bar
 
-  + [GET] /bar/<bar_id>
+  + [GET] /bar/<bar_id>/<day>
   + 'Authorization' header to be included with access token
   + Upon success returns in json {'status' : string, 'message' : string,'bar':{ 'bar_id':string, 'name': string, 'location':string, 'phone':string, 'cover':string, 'specials':[{'special_id':integer, 'special_name':string, 'description':string, 'bar_id':string, 'object':null or {drinks:[quantity, max]}}] } }, 200
 
++ Specials
+
+  +[GET] /specials/<day>
+  + 'Authorization' header to be included with access token
+  + Upon success returns in json {'status' : string, 'message' : string, specials:['special_id': string, 'special_name': string, 'bar_id':string, 'object':{drink:[quantity, max]}, 'description':string]
+
 + Create Rail Card
 
-  + [POST] /user_specials/<bar_id>/<special_id>/create
+  + [POST] /user_specials/<bar_id>/<special_id>/<day>
   + 'Authorization' header to be included with access token
   +  Upon success will return an {'status' : string, 'message' : string, 'username':string, 'object': {drink:[quantity, max]}}
 
