@@ -4,6 +4,7 @@ import flask
 import datetime
 import sys, traceback
 import requests
+import datetime
 
 from user import User
 from bar import Bar
@@ -284,31 +285,37 @@ def create_specials(input_specials):
             special['description'], special['bar_id'], special['object']))
     return specials
 
-@app.route('/bar/<bar_id>', methods = ['GET'])
-def get_bar(bar_id):
+@app.route('/bar/<bar_id>/<day>', methods = ['GET'])
+def get_bar(bar_id, day):
+    day = int(day)
     auth_header = request.headers.get('Authorization')
     auth_token, valid = get_authorization(auth_header)
     if valid:
         try:
             bar = db_ops.check_bar_db(bar_id)
             if bar:
+                specials = create_specials(bar['specials'][day])
                 bar = Bar(bar['bar_id'], bar['name'], bar['location'],
-                    bar['phone'], bar['cover'], specials = create_specials(bar['specials']))
+                    bar['phone'], bar['cover'])
+                bar.specials[day] = specials
+                print(bar)
                 responseObject  = {
                     'status' : 'success',
                     'message' : 'Found bar.',
-                    'bar': bar.to_dict()
+                    'bar': bar.to_dict(day)
                 }
                 return make_response(jsonify(responseObject)), 200
             else:
                 create_response('fail', 'Did not find bar', 401)
         except Exception as e:
+            traceback.print_exc(file=sys.stdout)
             return create_response('fail', 'Threw an Exception', 401)
     else:
         return create_response('fail', 'Invalid Token', 401)
 
-@app.route('/specials', methods = ['GET'])
-def get_specials():
+@app.route('/specials/<day>', methods = ['GET'])
+def get_specials(day):
+    day = int(day)
     auth_header = request.headers.get('Authorization')
     auth_token, valid = get_authorization(auth_header)
     if valid:
@@ -316,10 +323,11 @@ def get_specials():
             responseObject = {
                 'status': 'success',
                 'message': 'Successfully added user.',
-                'specials': db_ops.get_specials()
+                'specials': db_ops.get_specials(day)
             }
             return make_response(jsonify(responseObject)), 200
         except Exception as e:
+            traceback.print_exc(file=sys.stdout)
             return create_response('fail', 'Threw an Exception', 401)
     else:
         return create_response('fail', 'Invalid Token', 401)
@@ -336,27 +344,34 @@ def update_specials():
                 return create_response('fail', 'User does not exist', 401)
             content = request.get_json()
             bar_id = content['bar_id']
+            day = content['day']
             if not check_bar_id(bar_id, user['bars'], user['status']):
                 return create_response('fail', 'Incorrect priveleges.', 401)
             if content['operation'] == 'update':
                 special_id = content['special_id']
                 update = content['update']
-                db_ops.update_special(bar_id, special_id, update)
+                ret = db_ops.update_special(bar_id, special_id, update, day)
+                if ret == None:
+                    return create_response('fail', 'Special not found.', 401)
                 return create_response('success', 'Updated Special', 200)
             elif content['operation'] == 'create':
-                db_ops.create_special(bar_id, content['special'])
+                db_ops.create_special(bar_id, content['special'], day)
                 return create_response('success', 'Created Special.', 200)
             elif content['operation'] == 'delete':
                 special_id = content['special_id']
-                db_ops.delete_special(bar_id, special_id)
+                ret = db_ops.delete_special(bar_id, special_id, day)
+                if ret == None:
+                    return create_response('fail', 'Special not found.', 401)
                 return create_response('success', 'Deleted special.', 200)
         except Exception as e:
+            traceback.print_exc(file=sys.stdout)
             return create_response('fail', 'Threw an Exception', 401)
     else:
         return create_response('fail', 'Invalid Token', 401)
 
-@app.route('/user_specials/<bar_id>/<special_id>/create', methods = ['POST'])
-def create_user_specials(bar_id, special_id):
+@app.route('/user_specials/<bar_id>/<special_id>/<day>', methods = ['POST'])
+def create_user_specials(bar_id, special_id, day):
+    day = int(day)
     auth_header = request.headers.get('Authorization')
     auth_token, valid = get_authorization(auth_header)
     if valid:
@@ -365,10 +380,7 @@ def create_user_specials(bar_id, special_id):
             user = db_ops.check_user_db(resp)
             if user == None:
                 return create_response('fail', 'User does not exist', 401)
-            special_object = db_ops.find_user_special(bar_id, int(special_id))
-            if special_object == None:
-                return create_response('fail',
-                    'Bar does not have a special object', 401)
+            special_object = db_ops.find_user_special(bar_id, int(special_id), day)
             obj = db_ops.create_user_special(bar_id, special_id, user, special_object)
             if obj  == None:
                 return create_response('fail', 'failed to create object', 401)
@@ -395,8 +407,6 @@ def get_user_special(bar_id, special_id):
             if user == None:
                 return create_response('fail', 'User does not exist', 401)
             obj = db_ops.get_user_special(bar_id, special_id, user['specials'])
-            if obj == None:
-                return create_response('fail', 'Object was not found', 401)
             responseObject = {
                 'status': 'success',
                 'message': 'Successfully retreived object.',
