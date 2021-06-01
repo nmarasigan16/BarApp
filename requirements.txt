@@ -42,7 +42,7 @@ Sphinx==1.6.5
 sphinx-autobuild==0.7.1
 sphinxcontrib-websupport==1.0.1
 tornado==4.5.2
-urllib3==1.22
+urllib3==1.26.5
 validate-email==1.3
 watchdog==0.8.3
 Werkzeug==0.12.2
